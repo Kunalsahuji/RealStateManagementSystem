@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const appointmentSchema = mongoose.Schema({
+const appointmentSchema =new mongoose.Schema({
     property: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "property"

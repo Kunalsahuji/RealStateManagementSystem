@@ -10,9 +10,8 @@
 // }
 // module.exports = connectDB
 const mongoose = require('mongoose');
-mongoose.connect(process.env.CONNECTION_STRING)
-    .then(() => {
-        console.log("Database Connect")
-    }).catch((err) => {
-        console.log(err)
-    });
+mongoose.connect("mongodb://0.0.0.0/real-state").then(() => {
+    console.log("DB connected!")
+}).catch((error) => {
+    console.log(error.message)
+})

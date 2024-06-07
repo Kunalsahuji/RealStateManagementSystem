@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
-const propertySchema = mongoose.Schema({
+const propertySchema = new mongoose.Schema({
     title: String,
     description: String,
     price: String,
     location: String,
-    image: String,
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "user"
@@ -13,6 +12,8 @@ const propertySchema = mongoose.Schema({
         type: String,
         enum: ["available", "sold", "pending"]
     },
+    image: String,
+
 })
 const PropertySchema = mongoose.model("property", propertySchema)
 module.exports = PropertySchema
