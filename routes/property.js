@@ -1,11 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const { isLoggedIn, varifyrole } = require('../utility/auth')
+const { isLoggedIn, varifyroleProperty } = require('../utility/auth')
 const PropertySchema = require('../models/propertyModel')
 const upload = require('../utility/multer')
 
 /* Create Property */
-router.post('/', isLoggedIn, varifyrole, upload.single("image"), async (req, res, next) => {
+router.post('/', isLoggedIn, varifyroleProperty, upload.single("image"), async (req, res, next) => {
     try {
         const newProperty = new PropertySchema({
             ...req.body,

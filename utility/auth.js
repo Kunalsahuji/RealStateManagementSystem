@@ -7,7 +7,7 @@ const isLoggedIn = (req, res, next) => {
     }
 }
 
-const varifyrole = (req, res, next) => {
+const varifyroleProperty = (req, res, next) => {
     if (req.user.roll == "seller") {
         next()
     }
@@ -16,4 +16,13 @@ const varifyrole = (req, res, next) => {
     }
 }
 
-module.exports = { isLoggedIn, varifyrole }
+const varifyroleAppointment = (req, res, next) => {
+    if (req.user.roll == "buyer") {
+        next()
+    }
+    else {
+        res.send("Only buyer have the permission to create appointment!")
+    }
+}
+
+module.exports = { isLoggedIn, varifyroleProperty, varifyroleAppointment }
