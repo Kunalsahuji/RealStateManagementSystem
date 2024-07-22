@@ -28,8 +28,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 // user Registration
 app.use(
   session({
-    resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
+    resave: true,
     secret: "j8rm",
   })
 );

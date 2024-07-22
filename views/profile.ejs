@@ -1,0 +1,50 @@
+<%- include("partials/header")%>
+    <div class="mt-5 w-[100%] p-3 m-auto">
+        <h1
+            class="w-[25%] hover:bg-slate-400 text-2xl rounded-2xl border border-slate-900 p-3 text-center italic hover:not-italic m-auto">
+            Profile Page</h1>
+        <% if(user.role=="seller" || user.role=="agent" ){ %>
+            <div class="mb-10 p-10 bg-green-300 m-auto text-center">
+                <a class="border rounded bg-gray-200 hover:bg-green-400 p-5" href="/property">Create Propertyss</a>
+            </div>
+            <% }%>
+
+                <div class="flex w-[50%] gap-10 mt-5">
+                    <% properties.forEach((prop)=> { %>
+                        <div class="overflow-auto p-5 bg-gray-200 w-[60%] rounded-2xl">
+                            <ul class="w-[100%] m-auto p-2">
+                                <br>
+                                <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                    <img class="h-[100px] object-cover" src="/images/<%= prop.image%>" alt="image-1">
+                                </li>
+                                <br>
+                                <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                    <%= (prop.title) %>
+                                </li>
+                                <br>
+                                <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                    <%= (prop.description) %>
+                                </li>
+                                <br>
+                                <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                    <%= (prop.price) %>
+                                </li>
+                                <br>
+                                <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                    <%= (prop.location) %>
+                                </li>
+                                <br>
+                                <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                    <%= (prop.status) %>
+                                </li>
+                            </ul>
+                            <br>
+                            <a class="rounded-2xl bg-green-300 px-4 py-4 w-[50%] ml-[26%]"
+                                href="/appointment/<%= prop._id%>">Get
+                                a
+                                Appointment</a>
+                        </div>
+                        <% }) %>
+                </div>
+    </div>
+    <%- include('partials/footer') %>

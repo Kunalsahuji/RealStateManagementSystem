@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real Estate Management System</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <nav class="py-3 w-[75%] flex justify-center items-center gap-x-10 m-auto">
+        <% if(!user){ %>
+            <a class="rounded-xl border border-slate-700 px-4 py-2 text-xl" href="/user">Home</a>
+            <a class="rounded-xl border border-slate-700 px-4 py-2 text-xl" href="/user/login">Login</a>
+            <% } else { %>
+                <a class="rounded-xl border border-slate-700 px-4 py-2 text-xl" href="/user">Home</a>
+                <a class="rounded-xl border border-slate-700 px-4 py-2 text-xl" href="/user/logout">Logout</a>
+
+                <% } %>
+
+    </nav>

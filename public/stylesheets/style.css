@@ -1,8 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  background: #DAE1FF;
+  background-image: url('https://img.freepik.com/free-photo/construction-illustration-city-skyline_53876-103044.jpg?size=626&ext=jpg&ga=GA1.1.1346829348.1700736960&semt=ais_user');
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+nav {
+  backdrop-filter: blur(10px);
+  /* box-shadow: 0px, 0px, 30px rgba(3, 27, 238, 0.082); */
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
+
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
 }
 
 a {
-  color: #00B7FF;
+  /* background: #7F94CC; */
+  color: #27293B;
+}
+
+propertyBack {
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.512);
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  color: #27293B;
+  backdrop-filter: blur(10px);
+  background-color: #fff;
+
 }

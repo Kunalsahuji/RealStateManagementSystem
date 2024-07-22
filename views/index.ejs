@@ -1,11 +1,51 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>RealState</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-  
-    <p>Welcome to Real State Management System</p>
-  </body>
-</html>
+<%- include("partials/header")%>
+  <div class="mb-5 w-[80%] mx-auto p-3">
+
+    <h1
+      class="w-[20%] text-2xl rounded-2xl border border-slate-700 p-3 m-auto text-center text-white font-bold italic hover:not-italic">
+      Homepage</h1>
+
+    <div class="p-5 mt-5">
+      <a class="hover:bg-slate-400 text-2xl rounded-2xl border border-slate-900 ml-10 px-4 py-3 mb-5 italic hover:not-italic"
+        href="/property">Create
+        Property</a>
+    </div>
+
+    <div class="flex w-[50%] gap-10">
+      <% properties.forEach((prop)=> { %>
+        <div class="overflow-auto p-3 bg-gray-200 w-[60%] rounded-2xl">
+          <ul class="w-[100%]">
+            <br>
+            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+              <img class="h-[100px]" src="/images/<%= prop.image%>" alt="image-1">
+            </li>
+            <br>
+            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+              <%= (prop.title) %>
+            </li>
+            <br>
+            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+              <%= (prop.description) %>
+            </li>
+            <br>
+            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+              <%= (prop.price) %>
+            </li>
+            <br>
+            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+              <%= (prop.location) %>
+            </li>
+            <br>
+            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+              <%= (prop.status) %>
+            </li>
+          </ul>
+          <br>
+          <a class="rounded-2xl bg-green-300 px-10 py-2 ml-5 w-[50%] mx-auto" href="/appointment/<%= prop._id%>">Get
+            a
+            Appointment</a>
+        </div>
+        <% }) %>
+    </div>
+  </div>
+  <%- include('partials/footer') %>

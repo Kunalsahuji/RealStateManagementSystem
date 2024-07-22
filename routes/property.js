@@ -5,6 +5,11 @@ const PropertySchema = require('../models/propertyModel')
 const upload = require('../utility/multer')
 
 /* Create Property */
+router.get('/', isLoggedIn, (req, res, next) => {
+    res.render('create-property', { user: req.user })
+}
+)
+
 router.post('/', isLoggedIn, varifyroleProperty, upload.single("image"), async (req, res, next) => {
     try {
         const newProperty = new PropertySchema({
@@ -13,7 +18,7 @@ router.post('/', isLoggedIn, varifyroleProperty, upload.single("image"), async (
             owner: req.user._id
         })
         await newProperty.save()
-        res.send("Property Created!")
+        res.redirect('/user')
     } catch (error) {
         console.log(error)
         res.send(error.message)
