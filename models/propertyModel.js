@@ -6,7 +6,7 @@ const propertySchema = new mongoose.Schema({
     location: String,
     owner: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "user"
+        ref: "User"
     },
     status: {
         type: String,
@@ -15,5 +15,5 @@ const propertySchema = new mongoose.Schema({
     image: String,
 
 })
-const PropertySchema = mongoose.model("property", propertySchema)
+const PropertySchema = mongoose.model("Property", propertySchema)
 module.exports = PropertySchema

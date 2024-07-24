@@ -12,7 +12,7 @@ const isLoggedIn = (req, res, next) => {
 }
 
 const varifyroleProperty = (req, res, next) => {
-    if (req.user.roll == "seller" || req.user.roll == "agent") {
+    if (req.user.role == "seller" || req.user.role == "agent") {
         next()
     }
     else {
@@ -21,7 +21,7 @@ const varifyroleProperty = (req, res, next) => {
 }
 
 const varifyroleAppointment = (req, res, next) => {
-    if (req.user.roll == "buyer") {
+    if (req.user.role == "buyer") {
         next()
     }
     else {

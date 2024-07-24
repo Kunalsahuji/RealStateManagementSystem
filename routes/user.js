@@ -2,18 +2,24 @@ var express = require('express');
 var router = express.Router();
 const UserSchema = require('../models/userModel')
 const PropertySchema = require('../models/propertyModel')
+const AppointmentSchema = require('../models/appointmentModel');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const { isLoggedIn } = require('../utility/auth')
+const { isLoggedIn } = require('../utility/auth');
 passport.use(UserSchema.createStrategy());
 
 /* GET home page */
 router.get('/', async (req, res, next) => {
   try {
     const properties = await PropertySchema.find()
+    const appointment = await AppointmentSchema.find()
+
     res.render('index', {
       properties: properties,
-      user: req.user
+      appointments: appointment,
+      user: req.user,
+      pid: req.params.propertyId
+
     })
   } catch (error) {
     console.log(error.message)
@@ -22,9 +28,28 @@ router.get('/', async (req, res, next) => {
 })
 
 // current user
-router.post('/current', isLoggedIn, (req, res, next) => {
-  console.log(req.user)
-  res.send(req.user)
+router.get('/current', async (req, res, next) => {
+  const properties = await PropertySchema.find()
+  const appointments = await AppointmentSchema.find()
+
+  res.render("index", {
+    properties: properties,
+    user: req.user,
+    appointments: appointments,
+    pid: req.params.propertyId
+
+  })
+})
+router.post('/current', isLoggedIn, async (req, res, next) => {
+  const properties = await PropertySchema.find()
+  const appointments = await AppointmentSchema.find()
+  req.render("index", {
+    properties: properties,
+    appointments: appointments,
+    user: req.user,
+    pid: req.params.propertyId
+
+  })
 
 })
 
@@ -37,12 +62,13 @@ router.get('/register', (req, res, next) => {
 
 router.post('/register', async (req, res, next) => {
   try {
-    const { name, email, password, roll } = req.body
-    const newUser = new UserSchema({ name, email, roll })
+    const { name, email, password, role } = req.body
+    const newUser = new UserSchema({ name, email, role })
     await UserSchema.register(newUser, password)
-    res.redirect('/login')
+    await newUser.save()
+    res.redirect("/user/login")
   } catch (error) {
-    console.log(error.message)
+    console.log(error)
     res.send(error)
   }
 })
@@ -75,9 +101,13 @@ router.get('/logout', (req, res, next) => {
 router.get('/profile', isLoggedIn, async (req, res, next) => {
   try {
     const properties = await PropertySchema.find()
+    const appointments = await AppointmentSchema.find()
     res.render('profile', {
       properties: properties,
-      user: req.user
+      appointments: appointments,
+      user: req.user,
+      pid: req.params.propertyId
+
     })
   } catch (error) {
     console.log(error)

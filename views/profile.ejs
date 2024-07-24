@@ -13,6 +13,9 @@
                     <% properties.forEach((prop)=> { %>
                         <div class="overflow-auto p-5 bg-gray-200 w-[60%] rounded-2xl">
                             <ul class="w-[100%] m-auto p-2">
+                                <li class=" border border-slate-900 px-3 py-2 text-center bg-white font-bold">
+                                    Property Creator: <%= (user.name) %> (<%= (user.role) %>)
+                                </li>
                                 <br>
                                 <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
                                     <img class="h-[100px] object-cover" src="/images/<%= prop.image%>" alt="image-1">
@@ -38,13 +41,42 @@
                                     <%= (prop.status) %>
                                 </li>
                             </ul>
-                            <br>
-                            <a class="rounded-2xl bg-green-300 px-4 py-4 w-[50%] ml-[26%]"
-                                href="/appointment/<%= prop._id%>">Get
-                                a
-                                Appointment</a>
+                            <hr>
+                            <% if(!appointments) { %>
+                                <a class="rounded-2xl bg-green-300 px-4 py-4 w-[50%] ml-[26%]"
+                                    href="/appointment/<%= prop._id%>">Get
+                                    a
+                                    Appointment</a>
+                                <% } else {%>
+                                    <div class="w-[100%] gap-10 mt-5 bg-red-200 ">
+                                        <% appointments.forEach((appointment)=> { %>
+                                            <div class="bg-gray-200 w-[100%] rounded-2xl px-2 py-2">
+                                                <ul class="w-[100%] bg-sky-200 rounded-3xl p-2">
+                                                    <li
+                                                        class=" border border-slate-900 px-3 py-2 text-center bg-white font-bold">
+                                                        Appointment Creator: <%= (appointment._id) %>
+                                                    </li>
+                                                    <br>
+                                                    <li
+                                                        class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                                        <%= (appointment.status) %>
+                                                    </li>
+                                                    <br>
+                                                    <li
+                                                        class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                                        <%= (appointment.date) %>
+                                                    </li>
+                                                </ul>
+                                                <br>
+                                            </div>
+                                            <% }) %>
+                                    </div>
+                                    <% }%>
+
                         </div>
                         <% }) %>
+
+
                 </div>
     </div>
     <%- include('partials/footer') %>

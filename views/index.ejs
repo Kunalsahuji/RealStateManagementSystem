@@ -10,7 +10,6 @@
         href="/property">Create
         Property</a>
     </div>
-
     <div class="flex w-[50%] gap-10">
       <% properties.forEach((prop)=> { %>
         <div class="overflow-auto p-3 bg-gray-200 w-[60%] rounded-2xl">
@@ -46,6 +45,15 @@
             Appointment</a>
         </div>
         <% }) %>
+    </div>
+    <div class="w-full flex">
+      <hr>
+      <ul>
+        <li>
+          <%= user %>
+        </li>
+      </ul>
+      <hr>
     </div>
   </div>
   <%- include('partials/footer') %>
