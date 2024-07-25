@@ -1,24 +1,22 @@
 <%- include("partials/header")%>
     <div class="mt-5 w-[80%] mx-auto">
-        <h1
-            class="w-[25%] hover:bg-slate-400 text-2xl rounded-3xl border border-slate-900 p-3 italic hover:not-italic m-auto">
+        <h1 class="w-[20%]  text-2xl rounded-3xl border border-slate-900 p-3 text-center m-auto">
             Create Property</h1>
-        <form class="w-[55%] m-auto rounded-xl m-auto text-center mb-5 mt-5 bg-slate-400 p-3" action="/property"
+        <form class="w-[55%] m-auto rounded-xl m-auto text-center mb-5 mt-5 bg-gray-200 p-3" action="/property"
             method="post" enctype="multipart/form-data">
-            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5  px-10 py-3 text-xl bg-slate-500"
+            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5  px-10 py-3 text-xl bg-gray-100 "
                 class="border" type="text" name="title" placeholder="Title"> <br>
-            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5  px-10 py-3 text-xl bg-slate-500"
+            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5  px-10 py-3 text-xl bg-gray-100 "
                 class="border" type="text" name="description" placeholder="Description"> <br>
-            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5  px-10 py-3 text-xl bg-slate-500"
+            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5  px-10 py-3 text-xl bg-gray-100 "
                 class="border" type="number" name="price" placeholder="Price"> <br>
-            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5  px-10 py-3 text-xl bg-slate-500"
+            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5  px-10 py-3 text-xl bg-gray-100 "
                 class="border" type="text" name="location" placeholder="Location"> <br>
-            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5  py-3 bg-slate-500" class="border"
+            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5  py-3 bg-gray-100 " class="border"
                 type="file" name="image" placeholder="Upload Image"> <br>
-            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5  px-10 py-3 text-xl bg-slate-500"
+            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5  px-10 py-3 text-xl bg-gray-100 "
                 class="border" type="status" name="status" placeholder="available | sold | pending"> <br>
-            <button
-                class="border rounded-2xl border-slate-700 px-20 py-2 text-2xl hover:bg-slate-500">Submit</button>
+            <button class="border-slate-700 text-xl border rounded-2xl bg-gray-200 w-[45%] px-3 py-2">Submit</button>
         </form>
 
     </div>

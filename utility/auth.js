@@ -8,7 +8,6 @@ const isLoggedIn = (req, res, next) => {
         );
     }
 
-
 }
 
 const varifyroleProperty = (req, res, next) => {

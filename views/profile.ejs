@@ -1,82 +1,156 @@
 <%- include("partials/header")%>
-    <div class="mt-5 w-[100%] p-3 m-auto">
-        <h1
-            class="w-[25%] hover:bg-slate-400 text-2xl rounded-2xl border border-slate-900 p-3 text-center italic hover:not-italic m-auto">
+    <div class="w-[100%] p-3 m-auto">
+        <h1 class="w-[20%] text-2xl rounded-2xl border border-slate-900 p-3 text-center mt-5 m-auto">
             Profile Page</h1>
-        <% if(user.role=="seller" || user.role=="agent" ){ %>
-            <div class="mb-10 p-10 bg-green-300 m-auto text-center">
-                <a class="border rounded bg-gray-200 hover:bg-green-400 p-5" href="/property">Create Propertyss</a>
-            </div>
-            <% }%>
+        <hr class="mb-5 mt-2">
 
-                <div class="flex w-[50%] gap-10 mt-5">
-                    <% properties.forEach((prop)=> { %>
-                        <div class="overflow-auto p-5 bg-gray-200 w-[60%] rounded-2xl">
-                            <ul class="w-[100%] m-auto p-2">
-                                <li class=" border border-slate-900 px-3 py-2 text-center bg-white font-bold">
-                                    Property Creator: <%= (user.name) %> (<%= (user.role) %>)
-                                </li>
-                                <br>
-                                <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                                    <img class="h-[100px] object-cover" src="/images/<%= prop.image%>" alt="image-1">
-                                </li>
-                                <br>
-                                <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                                    <%= (prop.title) %>
-                                </li>
-                                <br>
-                                <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                                    <%= (prop.description) %>
-                                </li>
-                                <br>
-                                <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                                    <%= (prop.price) %>
-                                </li>
-                                <br>
-                                <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                                    <%= (prop.location) %>
-                                </li>
-                                <br>
-                                <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                                    <%= (prop.status) %>
-                                </li>
-                            </ul>
-                            <hr>
-                            <% if(!appointments) { %>
-                                <a class="rounded-2xl bg-green-300 px-4 py-4 w-[50%] ml-[26%]"
-                                    href="/appointment/<%= prop._id%>">Get
-                                    a
-                                    Appointment</a>
-                                <% } else {%>
-                                    <div class="w-[100%] gap-10 mt-5 bg-red-200 ">
-                                        <% appointments.forEach((appointment)=> { %>
-                                            <div class="bg-gray-200 w-[100%] rounded-2xl px-2 py-2">
-                                                <ul class="w-[100%] bg-sky-200 rounded-3xl p-2">
-                                                    <li
-                                                        class=" border border-slate-900 px-3 py-2 text-center bg-white font-bold">
-                                                        Appointment Creator: <%= (appointment._id) %>
-                                                    </li>
-                                                    <br>
-                                                    <li
-                                                        class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                                                        <%= (appointment.status) %>
-                                                    </li>
-                                                    <br>
-                                                    <li
-                                                        class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                                                        <%= (appointment.date) %>
-                                                    </li>
-                                                </ul>
-                                                <br>
-                                            </div>
-                                            <% }) %>
+        <div class="flex flex-col w-[100%] gap-10 mt-5 justify-between items-start">
+
+            <!-- start -->
+            <div class="flex bg-gray-100 w-[100%] rounded-2xl gap-10 p-2">
+                <div class="flex mt-10 p-3 justify-center items-center gap-10 mb-5 underline">
+
+                    <% if(user.role=="seller" || user.role=="agent" ){ %>
+                        <div class=" ">
+                            <a class="border rounded-2xl bg-gray-200 font-bold p-5" href="/property">Create Property</a>
+                        </div>
+                        <% }%>
+                </div>
+                <% properties.forEach((prop)=> { %>
+                    <div class="mt-5 mb-5">
+                        <ul class="w-[100%] m-auto bg-gray-200 px-2 py-2 rounded-2xl">
+                            <li class="text-center font-semibold underline w-full text-xl">Property
+                                Details:
+                            </li>
+                            <br>
+                            <li class=" border border-slate-900 px-3 py-2 text-center bg-white font-bold">
+                                Property Creator: <%= (user.name) %> (<%= (user.role) %>)
+                            </li>
+                            <br>
+                            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                <img class="h-[100px] object-cover" src="/images/<%= prop.image%>" alt="image-1">
+                            </li>
+                            <br>
+                            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                <%= (prop.title) %>
+                            </li>
+                            <br>
+                            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                <%= (prop.description) %>
+                            </li>
+                            <br>
+                            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                <%= (prop.price) %>
+                            </li>
+                            <br>
+                            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                <%= (prop.location) %>
+                            </li>
+                            <br>
+                            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                                <%= (prop.status) %>
+                            </li>
+                            <br>
+                            <li class="text-center mb-5 mt-2">
+                                <% if(user.role=="buyer" ){ %>
+                                    <div class="">
+                                        <a class="rounded-2xl border border-slate-900 text-center bg-gray-200 px-10 py-3 text-xl font-semibold"
+                                            href="/appointment/<%= user._id%>">Get
+                                            a
+                                            Appointment</a>
                                     </div>
                                     <% }%>
+                            </li>
+                        </ul>
+                    </div>
+                    <% }) %>
+            </div>
+            <!-- property end -->
+            <div class="flex bg-gray-100 w-[100%] gap-10 mt-5">
+                <div class="flex mt-10 p-3 justify-center items-center gap-10 mb-5 underline">
 
+                    <% if(user.role=="buyer" ){ %>
+                        <div class="">
+                            <a class="border rounded-2xl bg-gray-200 font-bold p-5"
+                                href="/appointment/<%= user._id%>">Get
+                                a
+                                Appointment</a>
                         </div>
-                        <% }) %>
-
-
+                        <% }%>
                 </div>
+                <% if(!appointments) { %>
+                    <a class="rounded-2xl bg-gray-300 px-4 py-4 w-[50%] ml-[26%]" href="/appointment/<%= user._id%>">Get
+                        a Appointment</a>
+                    <% } else {%>
+                        <div class="w-[20%] gap-10">
+                            <% appointments.forEach((appointment)=> { %>
+                                <div class="w-[100%] rounded-2xl mt-5 px-2 py-2 bg-gray-100">
+
+                                    <ul class="w-[100%] m-auto bg-gray-200 p-3 rounded-2xl">
+                                        <li class="text-center font-semibold underline w-full text-xl">
+                                            Appointment
+                                            Details:
+                                        </li>
+                                        <br>
+                                        <li class=" border border-slate-900 px-3 py-2 text-center bg-white">
+                                            <span class="font-bold">Appointment Creator:</span>
+                                            <%= (appointment.user) %>
+                                        </li>
+                                        <br>
+                                        <li class=" border border-slate-900 px-3 py-2 text-center bg-white">
+                                            <span class="font-bold">Appointment ID:</span>
+                                            <%= (appointment._id) %>
+                                        </li>
+                                        <br>
+                                        <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-white ">
+                                            <%= (appointment.status) %>
+                                        </li>
+                                        <br>
+                                        <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-white ">
+                                            <%= (appointment.date) %>
+                                        </li>
+                                    </ul>
+                                    <br>
+                                </div>
+                                <% }) %>
+                        </div>
+                        <% }%>
+            </div>
+            <!-- appointment end -->
+            <div class="flex w-[100%] gap-10 mt-5 bg-gray-100">
+                <div class="flex p-3 justify-center items-center gap-10 mb-5 underline">
+                    <h1 class="border rounded-2xl bg-gray-200 font-bold p-5">User Details</h1>
+                </div>
+                <div class="w-[20%] rounded-2xl px-2 py-2 bg-gray-100 mt-5">
+                    <ul class="w-[100%] m-auto bg-gray-200 p-3 rounded-2xl">
+                        <li class="text-center font-semibold underline w-full text-xl">User
+                            Details:
+                        </li>
+                        <br>
+                        <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-white ">
+                            <%= (user.id) %>
+                        </li>
+                        <br>
+                        <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-white ">
+                            <%= (user.name) %>
+                        </li>
+                        <br>
+                        <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-white ">
+                            <%= (user.email) %>
+                        </li>
+                        <br>
+                        <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-white ">
+                            <%= (user.role) %>
+                        </li>
+                        <br>
+                    </ul>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="flex items-center justify-between">
+            <a class="rounded-2xl bg-gray-300 px-4 py-4 w-[50%] ml-[26%]" href="/appointment/<%= user._id%>">Get
+                a Appointment</a>
+        </div> -->
     </div>
     <%- include('partials/footer') %>
