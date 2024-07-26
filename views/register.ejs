@@ -1,29 +1,28 @@
 <%- include("partials/header")%>
-    <div class="w-[70%] mx-auto">
+    <div class="w-[100%] mx-auto">
 
-        <h1
-            class="w-[25%] hover:bg-slate-400 text-2xl rounded-3xl border border-slate-900 px-3 py-3 italic mt-4 hover:not-italic text-center m-auto">
+        <h1 class="w-[25%]  text-2xl rounded-3xl border border-slate-900 px-3 py-3 mt-4 text-center m-auto">
             Register Page</h1>
-        <form class="w-[70%] m-auto rounded-xl  mt-5 m-auto text-center mb-5 bg-slate-400 p-2" action="/user/register"
-            method="post">
-            <input class="rounded-2xl border border-slate-700 text-black-400 mt-5 px-10 py-3 text-xl bg-slate-500"
-                type="text" name="name" placeholder="enter name">
-            <br> <br>
-            <input class="rounded-2xl border border-slate-700 text-black-400 mt-5 px-10 py-3 text-xl bg-slate-500"
-                type="email" name="email" placeholder="enter email">
-            <br> <br>
-            <input class="rounded-2xl border border-slate-700 text-black-400 mt-5 px-10 py-3 text-xl bg-slate-500"
-                type="password" name="password" placeholder="enter password">
-            <br><br>
-            <input class="rounded-2xl border border-slate-700 text-black-400 mt-5 px-10 py-3 text-xl bg-slate-500"
-                type="text" name="role" placeholder="buyer | seller | agent">
-            <br> <br>
-            <button
-                class="border rounded-2xl border-slate-700 px-20 py-2 text-2xl mb-1 hover:bg-slate-500">Register</button>
+        <hr class="mb-5 mt-2 w-[90%] px-5 m-auto">
+
+        <form class="w-[50%] m-auto rounded-xl text-center mb-5 px-4 py-8 bg-gray-200" action="/user/register" method="post">
+            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5 px-10 py-3 text-xl" type="text"
+                name="name" placeholder="enter name">
+            <br>
+            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5 px-10 py-3 text-xl " type="email"
+                name="email" placeholder="enter email">
+            <br>
+            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5 px-10 py-3 text-xl " type="password"
+                name="password" placeholder="enter password">
+            <br>
+            <input class="rounded-2xl border border-slate-700 text-black-400 mb-5 px-10 py-3 text-xl " type="text"
+                name="role" placeholder="buyer | seller | agent">
+            <br>
+            <button class="border rounded-2xl border-slate-700 px-20 py-2 text-2xl mb-1 mt-5">Register</button>
         </form>
-        <div class=" w-[65%] m-auto text-slate-900 font-semibold text-xl m-auto text-center p-3">Already Have
+        <div class=" w-[65%] m-auto text-slate-900 font-semibold text-xl m-auto text-center p-2">Already Have
             an account ?
-            <a class="hover:bg-slate-400 text-2xl rounded-full border border-slate-900 px-5 py-2 italic hover:not-italic"
+            <a class="text-2xl rounded-full border border-slate-900 px-5 py-2 hover:bg-gray-200"
                 href="/user/login">Login User</a>
         </div>
     </div>

@@ -1,24 +1,24 @@
 <%- include("partials/header")%>
-    <div class="w-[100%] p-3 m-auto">
-        <h1 class="w-[20%] text-2xl rounded-2xl border border-slate-900 p-3 text-center mt-5 m-auto">
+    <div class="w-[100%] px-10 py-4 m-auto">
+        <h1 class="w-[20%] text-2xl rounded-2xl border border-slate-900 p-3 text-center m-auto overflow-auto">
             Profile Page</h1>
-        <hr class="mb-5 mt-2">
+        <hr class="mb-5 mt-2 w-[96%] m-auto">
 
-        <div class="flex flex-col w-[100%] gap-10 mt-5 justify-between items-start">
+        <div class="flex flex-col w-[96%] gap-10 mt-5 justify-between items-start m-auto py-4 bg-red-200">
 
             <!-- start -->
-            <div class="flex bg-gray-100 w-[100%] rounded-2xl gap-10 p-2">
-                <div class="flex mt-10 p-3 justify-center items-center gap-10 mb-5 underline">
+            <div class="flex bg-gray-100 w-[100%] rounded-2xl m-auto gap-10 px-4 py-4 bg-yellow-200 overflow-auto">
+                <div class=" flex items-center justify-center px-4 py-2 gap-10 mb-5 underline bg-green-200">
 
                     <% if(user.role=="seller" || user.role=="agent" ){ %>
                         <div class=" ">
-                            <a class="border rounded-2xl bg-gray-200 font-bold p-5" href="/property">Create Property</a>
+                            <a class="border rounded-2xl bg-gray-200 font-bold px-4 py-2 w-[5%]" href="/property">Create Property</a>
                         </div>
                         <% }%>
                 </div>
                 <% properties.forEach((prop)=> { %>
                     <div class="mt-5 mb-5">
-                        <ul class="w-[100%] m-auto bg-gray-200 px-2 py-2 rounded-2xl">
+                        <ul class="w-[100%] m-auto bg-gray-200 px-2 py-2 rounded-2xl m-auto">
                             <li class="text-center font-semibold underline w-full text-xl">Property
                                 Details:
                             </li>
@@ -28,7 +28,8 @@
                             </li>
                             <br>
                             <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                                <img class="h-[100px] object-cover" src="/images/<%= prop.image%>" alt="image-1">
+                                <img class="w-[200px] h-[150px] flex justify-center items-center m-auto"
+                                    src="/images/<%= prop.image%>" alt="image-1">
                             </li>
                             <br>
                             <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
@@ -66,8 +67,8 @@
                     <% }) %>
             </div>
             <!-- property end -->
-            <div class="flex bg-gray-100 w-[100%] gap-10 mt-5">
-                <div class="flex mt-10 p-3 justify-center items-center gap-10 mb-5 underline">
+            <div class="flex bg-gray-100 w-[100%] gap-10 mt-5 px-4 py-4 rounded-2xl overflow-auto">
+                <div class="flex mt-10 px-4 py-4 justify-center items-center gap-10 mb-5 underline">
 
                     <% if(user.role=="buyer" ){ %>
                         <div class="">
@@ -82,7 +83,7 @@
                     <a class="rounded-2xl bg-gray-300 px-4 py-4 w-[50%] ml-[26%]" href="/appointment/<%= user._id%>">Get
                         a Appointment</a>
                     <% } else {%>
-                        <div class="w-[20%] gap-10">
+                        <div class="w-[20%] gap-10 flex ">
                             <% appointments.forEach((appointment)=> { %>
                                 <div class="w-[100%] rounded-2xl mt-5 px-2 py-2 bg-gray-100">
 
@@ -117,12 +118,12 @@
                         <% }%>
             </div>
             <!-- appointment end -->
-            <div class="flex w-[100%] gap-10 mt-5 bg-gray-100">
-                <div class="flex p-3 justify-center items-center gap-10 mb-5 underline">
+            <div class="flex w-[100%] gap-20 bg-gray-100 rounded-2xl px-4 py-4 bg-orange-200 overflow-auto">
+                <div class="flex justify-center items-center gap-10 mb-5 underline px-4 py-4 ml-2">
                     <h1 class="border rounded-2xl bg-gray-200 font-bold p-5">User Details</h1>
                 </div>
-                <div class="w-[20%] rounded-2xl px-2 py-2 bg-gray-100 mt-5">
-                    <ul class="w-[100%] m-auto bg-gray-200 p-3 rounded-2xl">
+                <div class="w-[20%] rounded-2xl bg-gray-200 mt-5">
+                    <ul class="w-[100%] m-auto rounded-2xl px-4 py-4">
                         <li class="text-center font-semibold underline w-full text-xl">User
                             Details:
                         </li>

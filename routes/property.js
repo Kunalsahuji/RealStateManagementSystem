@@ -18,7 +18,7 @@ router.post('/', isLoggedIn, varifyroleProperty, upload.single("image"), async (
             owner: req.user._id
         })
         await newProperty.save()
-        res.redirect('/user')
+        res.redirect('/user/profile')
     } catch (error) {
         console.log(error)
         res.send(error.message)

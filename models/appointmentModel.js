@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const appointmentSchema =new mongoose.Schema({
+const appointmentSchema = new mongoose.Schema({
     property: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "property"
@@ -10,7 +10,7 @@ const appointmentSchema =new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ["schedule", "completed", "canceled"]
+        enum: ["schedule", "completed", "cancelled"]
     },
     date: Date,
 })
