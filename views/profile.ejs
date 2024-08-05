@@ -1,6 +1,6 @@
 <%- include("partials/header")%>
     <div class="w-[100%] px-10 py-4 m-auto">
-        <h1 class="w-[20%] text-2xl rounded-2xl border border-slate-900 p-3 text-center m-auto overflow-auto">
+        <h1 class="w-[20%] text-2xl rounded-2xl border border-slate-900 p-3 text-center m-auto ">
             Profile Page</h1>
         <hr class="mb-5 mt-2 w-[96%] m-auto">
 
@@ -8,13 +8,18 @@
 
             <!-- start -->
             <div class="flex bg-gray-100 w-[100%] rounded-2xl m-auto gap-10 px-4 py-4 bg-yellow-200 overflow-auto">
-                <div class=" flex items-center justify-center px-4 py-2 gap-10 mb-5 underline bg-green-200">
+                <div class="flex items-center justify-center px-4 py-2 gap-10 mb-5 underline bg-green-200 w-[100%]">
 
                     <% if(user.role=="seller" || user.role=="agent" ){ %>
-                        <div class=" ">
-                            <a class="border rounded-2xl bg-gray-200 font-bold px-4 py-2 w-[5%]" href="/property">Create Property</a>
+                        <div class="w-mx">
+                            <a class="border rounded-2xl bg-gray-200 font-bold px-10 py-2 w-[100%]"
+                                href="/property">Create
+                                Property</a>
                         </div>
-                        <% }%>
+                        <% } if(!properties) {%>
+                            <h1>abhi properties nhi banaye h...</h1>
+                            <% } %>
+
                 </div>
                 <% properties.forEach((prop)=> { %>
                     <div class="mt-5 mb-5">
@@ -24,7 +29,8 @@
                             </li>
                             <br>
                             <li class=" border border-slate-900 px-3 py-2 text-center bg-white font-bold">
-                                Property Creator: <%= (user.name) %> (<%= (user.role) %>)
+                                Property Creator: <%= prop.owner.name %>
+                                    <%= prop.owner.role %>
                             </li>
                             <br>
                             <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
@@ -53,14 +59,18 @@
                             </li>
                             <br>
                             <li class="text-center mb-5 mt-2">
-                                <% if(user.role=="buyer" ){ %>
+                                <!-- <% if(owner.role=="buyer"){ %>
                                     <div class="">
                                         <a class="rounded-2xl border border-slate-900 text-center bg-gray-200 px-10 py-3 text-xl font-semibold"
                                             href="/appointment/<%= user._id%>">Get
                                             a
                                             Appointment</a>
                                     </div>
-                                    <% }%>
+                                    <% }%> -->
+                                <a class="rounded-2xl border border-slate-900 text-center bg-gray-200 px-10 py-3 text-xl font-semibold"
+                                    href="/appointment/<%= user._id%>">Get
+                                    a
+                                    Appointment</a>
                             </li>
                         </ul>
                     </div>
@@ -70,7 +80,7 @@
             <div class="flex bg-gray-100 w-[100%] gap-10 mt-5 px-4 py-4 rounded-2xl overflow-auto">
                 <div class="flex mt-10 px-4 py-4 justify-center items-center gap-10 mb-5 underline">
 
-                    <% if(user.role=="buyer" ){ %>
+                    <% if(owner.role=="buyer" ){ %>
                         <div class="">
                             <a class="border rounded-2xl bg-gray-200 font-bold p-5"
                                 href="/appointment/<%= user._id%>">Get
@@ -95,7 +105,7 @@
                                         <br>
                                         <li class=" border border-slate-900 px-3 py-2 text-center bg-white">
                                             <span class="font-bold">Appointment Creator:</span>
-                                            <%= (appointment.user) %>
+                                            <%= (appointment.owner.name) %>
                                         </li>
                                         <br>
                                         <li class=" border border-slate-900 px-3 py-2 text-center bg-white">

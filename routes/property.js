@@ -15,7 +15,9 @@ router.post('/', isLoggedIn, varifyroleProperty, upload.single("image"), async (
         const newProperty = new PropertySchema({
             ...req.body,
             image: req.file.filename,
-            owner: req.user._id
+            owner: req.user._id,
+            user: req.user
+
         })
         await newProperty.save()
         res.redirect('/user/profile')

@@ -3,46 +3,53 @@
 
     <h1 class="w-[20%] text-2xl rounded-2xl border border-slate-700 p-3 m-auto text-center">
       Homepage</h1>
-      <hr class="mb-5 mt-2 w-[103%] m-auto px-10 -ml-5">
+    <hr class="mb-5 mt-2 w-[103%] m-auto px-10 -ml-5">
 
-    <div class="flex w-[100%] gap-10 mt-5">
-      <% properties.forEach((prop)=> { %>
-        <div class="overflow-auto p-3 bg-gray-200 w-[100%] rounded-2xl">
-          <ul class="w-[100%]">
-            <li class="text-center font-semibold underline w-full text-xl">Property Details: </li>
-            <br>
-            <li class=" border border-slate-900 px-3 py-2 text-center bg-white font-bold">
-              Property Creator: <%= (prop.owner) %>
-            </li>
-            <br>
-            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200 w-[100%] h-[50%]">
-              <img class="w-[200px] h-[150px] object-center flex justify-center items-center m-auto"
-                src="/images/<%= prop.image%>" alt="image-1">
-            </li>
-            <br>
-            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-              <%= (prop.title) %>
-            </li>
-            <br>
-            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-              <%= (prop.description) %>
-            </li>
-            <br>
-            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-              <%= (prop.price) %>
-            </li>
-            <br>
-            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-              <%= (prop.location) %>
-            </li>
-            <br>
-            <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-              <%= (prop.status) %>
-            </li>
-          </ul>
-          <br>
-        </div>
-        <% }) %>
+    <div class="m-auto ">
+      <h1>Property abhi nhi h</h1>
+      <% if(!properties) { %>
+        <h1 class="text-2xl m-auto w-full underline">There is no properties created yet...</h1>
+        <% } else {%>
+          <div class="flex w-[100%] gap-10 mt-5">
+            <% properties.forEach((prop)=> { %>
+              <div class="overflow-auto p-3 bg-gray-200 w-[100%] rounded-2xl">
+                <ul class="w-[100%]">
+                  <li class="text-center font-semibold underline w-full text-xl">Property Details: </li>
+                  <br>
+                  <li class=" border border-slate-900 px-3 py-2 text-center bg-white font-bold">
+                    Property Creator: <%= (prop.owner.name) %>
+                  </li>
+                  <br>
+                  <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200 w-[100%] h-[50%]">
+                    <img class="w-[200px] h-[150px] object-center flex justify-center items-center m-auto"
+                      src="/images/<%= prop.image%>" alt="image-1">
+                  </li>
+                  <br>
+                  <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                    <%= (prop.title) %>
+                  </li>
+                  <br>
+                  <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                    <%= (prop.description) %>
+                  </li>
+                  <br>
+                  <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                    <%= (prop.price) %>
+                  </li>
+                  <br>
+                  <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                    <%= (prop.location) %>
+                  </li>
+                  <br>
+                  <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
+                    <%= (prop.status) %>
+                  </li>
+                </ul>
+                <br>
+              </div>
+              <% }) %>
+          </div>
+          <% }%>
     </div>
   </div>
   <%- include('partials/footer') %>

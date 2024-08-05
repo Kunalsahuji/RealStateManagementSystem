@@ -8,8 +8,9 @@ const { isLoggedIn, varifyroleAppointment } = require('../utility/auth')
 router.get('/:propertyId', isLoggedIn, varifyroleAppointment, (req, res, next) => {
     res.render('create-appointment',
         {
-            user: req.user,
-            pid: req.params.propertyId
+            owner: req.user_id,
+            property: req.params.propertyId,
+            user: req.user_id
         })
 })
 
@@ -17,8 +18,10 @@ router.post('/:propertyId', isLoggedIn, varifyroleAppointment, async (req, res, 
     try {
         const newAppointment = new AppointmentSchema({
             ...req.body,
-            user: req.user._id,
-            pid: req.params.propertyId
+            owner: req.user._id,
+            property: req.params.propertyId,
+            user: req.user
+
         })
         await newAppointment.save()
         res.redirect('/user/profile')

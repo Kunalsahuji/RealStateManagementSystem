@@ -2,15 +2,15 @@ const mongoose = require('mongoose');
 const appointmentSchema = new mongoose.Schema({
     property: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "property"
+        ref: "Property"
     },
-    user: {
+    owner: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "user"
+        ref: "User"
     },
     status: {
         type: String,
-        enum: ["schedule", "completed", "cancelled"]
+        enum: ["scheduled", "completed", "cancelled"]
     },
     date: Date,
 })

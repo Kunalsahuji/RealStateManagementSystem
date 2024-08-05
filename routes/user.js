@@ -11,14 +11,13 @@ passport.use(UserSchema.createStrategy());
 /* GET home page */
 router.get('/', async (req, res, next) => {
   try {
-    const properties = await PropertySchema.find()
-    const appointment = await AppointmentSchema.find()
-
+    const properties = await PropertySchema.find().populate('owner')
+    console.log(`/page user: ${req.user}, owner: ${req.user}, properties: ${properties}, propertyId: ${req.params.propertyId}`)
     res.render('index', {
       properties: properties,
-      appointments: appointment,
       user: req.user,
-      pid: req.params.propertyId
+      property: req.params.propertyId,
+      owner: req.user
 
     })
   } catch (error) {
@@ -29,25 +28,24 @@ router.get('/', async (req, res, next) => {
 
 // current user
 router.get('/current', async (req, res, next) => {
-  const properties = await PropertySchema.find()
-  const appointments = await AppointmentSchema.find()
+  const properties = await PropertySchema.find().populate("owner")
+  const appointments = await AppointmentSchema.find().populate("owner")
 
-  res.render("index", {
+  res.render("profile", {
     properties: properties,
-    user: req.user,
+    owner: req.user,
     appointments: appointments,
-    pid: req.params.propertyId
-
+    user: req.user
   })
 })
 router.post('/current', isLoggedIn, async (req, res, next) => {
-  const properties = await PropertySchema.find()
-  const appointments = await AppointmentSchema.find()
+  const properties = await PropertySchema.find("owner")
+  const appointments = await AppointmentSchema.find("owner")
   req.render("index", {
     properties: properties,
     appointments: appointments,
-    user: req.user,
-    pid: req.params.propertyId
+    owner: req.user,
+    user: req.user
 
   })
 
@@ -100,13 +98,19 @@ router.get('/logout', (req, res, next) => {
 // profile
 router.get('/profile', isLoggedIn, async (req, res, next) => {
   try {
-    const properties = await PropertySchema.find()
-    const appointments = await AppointmentSchema.find()
+    const properties = await PropertySchema.find().populate('owner')
+    console.log(`properties h : ${properties}`)
+    const appointments = await AppointmentSchema.find().populate('owner')
+    const propertyId = await AppointmentSchema.find().populate('property')
+    console.log(`appointments h ${appointments}`)
+    console.log(`propertyId h ${propertyId}`)
+    console.log(`/profile/user: ${req.user}, owner/profile: ${req.user}`)
     res.render('profile', {
       properties: properties,
       appointments: appointments,
+      owner: req.user,
       user: req.user,
-      pid: req.params.propertyId
+      propertyId: req.params.propertyId
 
     })
   } catch (error) {
