@@ -10,15 +10,69 @@
 </head>
 
 <body>
-    <nav class="py-3 w-[75%] flex justify-center items-center gap-x-10 m-auto">
-        <% if(!user){ %>
-            <a class="rounded-xl border border-slate-700 px-4 py-2 text-xl" href="/user">Home</a>
-            <a class="rounded-xl border border-slate-700 px-4 py-2 text-xl" href="/user/login">Login</a>
-            <% } else { %>
-                <a class="rounded-xl border border-slate-700 px-4 py-2 text-xl" href="/user">Home</a>
-                <a class="rounded-xl border border-slate-700 px-4 py-2 text-xl" href="/user/profile">Profile</a>
-                <a class="rounded-xl border border-slate-700 px-4 py-2 text-xl" href="/user/logout">Logout</a>
 
-                <% } %>
+    <nav class="shadow-lg py-4 rounded-lg w-[95%] m-auto glass border border-gray-600">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <div class="text-2xl font-bold">Real Estate</div>
+            <div class="hidden md:flex space-x-10 ">
+                <% if(!user){ %>
+                    <a class="transform hover:scale-110 transition duration-300 underline" href="/user">Home</a>
+                    <a class="transform hover:scale-110 transition duration-300 underline" href="/user/login">Login</a>
+                    <a class="transform hover:scale-110 transition duration-300 underline" href="/user/about">About
+                        us</a>
 
+                    <% } else { %>
+                        <a class="transform hover:scale-110 transition duration-300 underline"
+                            href="/user/profile">Profile</a>
+                        <a class="transform hover:scale-110 transition duration-300 underline"
+                            href="/user/logout">Logout</a>
+                        <a class="transform hover:scale-110 transition duration-300 underline" href="/user/about">About
+                            us</a>
+
+                        <% } %>
+
+
+            </div>
+            <div class="md:hidden">
+                <button id="menu-toggle" class="focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="md:hidden hidden">
+            <div class="px-2 pt-3 pb-3 space-y-1">
+                <% if(!user){ %>
+                    <a class="border border-gray-600 text-center rounded-lg block transform hover:scale-105 transition duration-300"
+                        href="/user">Home</a>
+                    <a class="border border-gray-600 text-center  rounded-lg block transform hover:scale-105 transition duration-300"
+                        href="/user/login">Login</a>
+                    <a class="border border-gray-600 text-center  rounded-lg block transform hover:scale-105 transition duration-300"
+                        href="/user/about">About us</a>
+
+                    <% } else { %>
+                        <a class="border border-gray-600 text-center rounded-lg block transform hover:scale-105 transition duration-300"
+                            href="/user">Home</a>
+                        <a class="border border-gray-600 text-center rounded-lg block transform hover:scale-105 transition duration-300"
+                            href="/user/profile">Profile</a>
+                        <a class="border border-gray-600 text-center rounded-lg block transform hover:scale-105 transition duration-300"
+                            href="/user/logout">Logout</a>
+                        <a class="border border-gray-600 text-center rounded-lg block transform hover:scale-105 transition duration-300"
+                            href="/user/about">About
+                            us</a>
+
+                        <% } %>
+            </div>
+        </div>
     </nav>
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuToggle.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>

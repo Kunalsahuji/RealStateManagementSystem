@@ -26,6 +26,15 @@ router.get('/', async (req, res, next) => {
   }
 })
 
+router.get('/about', async (req, res, next) => {
+  try {
+    res.render('about', { user: req.user })
+  } catch (error) {
+    console.log(error)
+    res.send(error)
+  }
+})
+
 // current user
 router.get('/current', async (req, res, next) => {
   const properties = await PropertySchema.find().populate("owner")

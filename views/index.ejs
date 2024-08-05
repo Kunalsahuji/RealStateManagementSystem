@@ -1,55 +1,49 @@
-<%- include("partials/header")%>
-  <div class="mb-5 w-[100%] mx-auto px-24 py-3">
+<%- include("partials/header") %>
+  <div class="mb-5 w-full mx-auto px-6 py-6 text-gray-800">
 
-    <h1 class="w-[20%] text-2xl rounded-2xl border border-slate-700 p-3 m-auto text-center">
-      Homepage</h1>
-    <hr class="mb-5 mt-2 w-[103%] m-auto px-10 -ml-5">
+    <h1 class="text-3xl font-bold text-center mb-6 text-gray-800">
+      Homepage
+    </h1>
+    <hr class="mb-5 w-3/4 mx-auto border-t-2 border-gray-200 mb-6 w-full">
 
-    <div class="m-auto ">
-      <h1>Property abhi nhi h</h1>
-      <% if(!properties) { %>
-        <h1 class="text-2xl m-auto w-full underline">There is no properties created yet...</h1>
-        <% } else {%>
-          <div class="flex w-[100%] gap-10 mt-5">
+    <div class="m-auto text-center">
+      <!-- <h1 class="text-3xl font-semibold text-gray-200 mb-4">Properties</h1> -->
+      <% if (!properties || properties.length===0) { %>
+        <h1 class="text-2xl text-gray-400">There are no properties created yet...</h1>
+        <% } else { %>
+          <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 gap-8 mt-5">
             <% properties.forEach((prop)=> { %>
-              <div class="overflow-auto p-3 bg-gray-200 w-[100%] rounded-2xl">
-                <ul class="w-[100%]">
-                  <li class="text-center font-semibold underline w-full text-xl">Property Details: </li>
-                  <br>
-                  <li class=" border border-slate-900 px-3 py-2 text-center bg-white font-bold">
-                    Property Creator: <%= (prop.owner.name) %>
+              <div
+                class="p-4 glass rounded-lg shadow-md transform transition duration-300 hover:scale-105 border border-gray-700">
+                <ul class="space-y-4">
+                  <li class="text-center font-semibold text-xl mb-2 text-white">Property Details:</li>
+                  <li class="px-4 py-2 text-center font-bold rounded-md shadow-md">
+                    Property Creator: <%= prop.owner.name %>
                   </li>
-                  <br>
-                  <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200 w-[100%] h-[50%]">
-                    <img class="w-[200px] h-[150px] object-center flex justify-center items-center m-auto"
-                      src="/images/<%= prop.image%>" alt="image-1">
+                  <li class="px-4 py-2 text-center rounded-md shadow-lg">
+                    <img class="w-full h-48 object-cover rounded-md shadow-lg" src="/images/<%= prop.image %>"
+                      alt="Property Image">
                   </li>
-                  <br>
-                  <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                    <%= (prop.title) %>
+                  <li class="px-4 py-2 text-center underline text-gray-800  rounded-md shadow-lg">
+                    <%= prop.title %>
                   </li>
-                  <br>
-                  <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                    <%= (prop.description) %>
+                  <li class="px-4 py-2 text-center underlinetext-gray-800  rounded-md shadow-lg">
+                    <%= prop.description %>
                   </li>
-                  <br>
-                  <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                    <%= (prop.price) %>
+                  <li class="px-4 py-2 text-center underlinetext-gray-800  rounded-md shadow-lg">
+                    <%= prop.price %>
                   </li>
-                  <br>
-                  <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                    <%= (prop.location) %>
+                  <li class="px-4 py-2 text-center underlinetext-gray-800  rounded-md shadow-lg">
+                    <%= prop.location %>
                   </li>
-                  <br>
-                  <li class="rounded-2xl border border-slate-900 px-3 py-2 text-center bg-gray-200">
-                    <%= (prop.status) %>
+                  <li class="px-4 py-2 text-center underlinetext-gray-800 rounded-md shadow-lg">
+                    <%= prop.status %>
                   </li>
                 </ul>
-                <br>
               </div>
               <% }) %>
           </div>
-          <% }%>
+          <% } %>
     </div>
   </div>
   <%- include('partials/footer') %>

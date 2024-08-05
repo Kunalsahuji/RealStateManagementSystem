@@ -9,26 +9,38 @@ body {
   background: #DAE1FF;
   background-image: url('https://img.freepik.com/free-photo/construction-illustration-city-skyline_53876-103044.jpg?size=626&ext=jpg&ga=GA1.1.1346829348.1700736960&semt=ais_user');
   background-size: cover;
-  background-repeat: repeat;
-  width: auto;
-  height: auto;
+
 }
 
-nav {
+
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.glass {
+  background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
-  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.5);
-  border: 2px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
-a {
-  color: #27293B;
+.input-field {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
 }
 
-propertyBack {
-  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.512);
-  border: 1.5px solid rgba(255, 255, 255, 0.18);
-  color: #27293B;
-  backdrop-filter: blur(10px);
-  background-color: #fff;
+.button {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  transition: background 0.3s ease;
+}
 
+.button:hover {
+  background: rgba(255, 255, 255, 0.3);
 }
