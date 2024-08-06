@@ -1,34 +1,12 @@
 var express = require('express');
 var router = express.Router();
-const AppointmentSchema = require('../models/appointmentModel')
-const { isLoggedIn, varifyroleAppointment } = require('../utility/auth')
+const { isLoggedIn, varifyroleAppointment } = require('../utility/auth');
+const { getAppointment, postAppointment } = require('../controllers/appointmentController');
 
 
 /* Create appointment */
-router.get('/:propertyId', isLoggedIn, varifyroleAppointment, (req, res, next) => {
-    res.render('create-appointment',
-        {
-            owner: req.user_id,
-            property: req.params.propertyId,
-            user: req.user_id
-        })
-})
+router.get('/:propertyId', isLoggedIn, varifyroleAppointment, getAppointment)
 
-router.post('/:propertyId', isLoggedIn, varifyroleAppointment, async (req, res, next) => {
-    try {
-        const newAppointment = new AppointmentSchema({
-            ...req.body,
-            owner: req.user._id,
-            property: req.params.propertyId,
-            user: req.user
-
-        })
-        await newAppointment.save()
-        res.redirect('/user/profile')
-    } catch (error) {
-        console.log(error)
-        res.send(error.message)
-    }
-})
+router.post('/:propertyId', isLoggedIn, varifyroleAppointment, postAppointment)
 
 module.exports = router

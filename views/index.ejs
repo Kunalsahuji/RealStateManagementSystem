@@ -7,9 +7,22 @@
     <hr class="mb-5 w-3/4 mx-auto border-t-2 border-gray-200 mb-6 w-full">
 
     <div class="m-auto text-center">
-      <!-- <h1 class="text-3xl font-semibold text-gray-200 mb-4">Properties</h1> -->
       <% if (!properties || properties.length===0) { %>
-        <h1 class="text-2xl text-gray-400">There are no properties created yet...</h1>
+        <div class="flex items-center justify-center">
+
+          <div
+            class="bg-cover glass bg-opacity-50 rounded-2xl w-full md:w-3/5 lg:w-2/5 h-[60vh] border border-zinc-500 flex flex-col items-center justify-center p-8 shadow-lg">
+            <h1 class="text-center text-3xl font-extrabold text-gray-900 px-4 mt-5">Welcome to Our Real Estate
+              Management System</h1>
+            <p class="text-center text-lg text-gray-800 mt-4 mb-8 font-bold">Create Propertires or Get a appointment</p>
+            <div class="flex flex-wrap justify-center gap-4">
+              <a class="hover:bg-gray-700 rounded-full text-white py-3 px-6 bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105"
+                href="/user/register">Register</a>
+              <a class="hover:bg-gray-700 rounded-full text-white py-3 px-6 bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105"
+                href="/user/login">Profile</a>
+            </div>
+          </div>
+        </div>
         <% } else { %>
           <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-cols-3 gap-8 mt-5">
             <% properties.forEach((prop)=> { %>
@@ -24,16 +37,16 @@
                     <img class="w-full h-48 object-cover rounded-md shadow-lg" src="/images/<%= prop.image %>"
                       alt="Property Image">
                   </li>
-                  <li class="px-4 py-2 text-center underline text-gray-800  rounded-md shadow-lg">
+                  <li class="px-4 py-2 text-center underline text-gray-800 rounded-md shadow-lg">
                     <%= prop.title %>
                   </li>
-                  <li class="px-4 py-2 text-center underlinetext-gray-800  rounded-md shadow-lg">
+                  <li class="px-4 py-2 text-center underlinetext-gray-800 rounded-md shadow-lg">
                     <%= prop.description %>
                   </li>
-                  <li class="px-4 py-2 text-center underlinetext-gray-800  rounded-md shadow-lg">
+                  <li class="px-4 py-2 text-center underlinetext-gray-800 rounded-md shadow-lg">
                     <%= prop.price %>
                   </li>
-                  <li class="px-4 py-2 text-center underlinetext-gray-800  rounded-md shadow-lg">
+                  <li class="px-4 py-2 text-center underlinetext-gray-800 rounded-md shadow-lg">
                     <%= prop.location %>
                   </li>
                   <li class="px-4 py-2 text-center underlinetext-gray-800 rounded-md shadow-lg">

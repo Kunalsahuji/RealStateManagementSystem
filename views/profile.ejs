@@ -13,57 +13,69 @@
                         class="block text-center bg-indigo-600 text-white rounded-xl px-6 py-3 font-semibold mb-4 hover:bg-indigo-700 transition">Create
                         Property</a>
                     <% } %>
-                        <% if (!properties) { %>
-                            <p class="text-center text-gray-400">No properties available.</p>
-                            <% } else { %>
-                                <% properties.forEach((prop)=> { %>
-                                    <div class="card glass rounded-xl p-4 mb-6">
-                                        <ul class="space-y-4">
-                                            <li class="text-xl font-semibold underline">Property Details:</li>
-                                            <li class="flex items-center space-x-4">
-                                                <img class="w-40 h-30 object-cover rounded-lg"
-                                                    src="/images/<%= prop.image %>" alt="Property Image">
-                                                <div>
-                                                    <p class="font-bold">Property Creator: <%= prop.owner.name %> (
-                                                            <%= prop.owner.role %>)</p>
-                                                    <p><strong>Title:</strong>
-                                                        <%= prop.title %>
-                                                    </p>
-                                                    <p><strong>Description:</strong>
-                                                        <%= prop.description %>
-                                                    </p>
-                                                    <p><strong>Price:</strong>
-                                                        <%= prop.price %>
-                                                    </p>
-                                                    <p><strong>Location:</strong>
-                                                        <%= prop.location %>
-                                                    </p>
-                                                    <p><strong>Status:</strong>
-                                                        <%= prop.status %>
-                                                    </p>
-                                                </div>
-                                            </li>
-                                            <li class="text-center">
-                                                <a href="/appointment/<%= user._id %>"
-                                                    class="inline-block bg-indigo-600 text-white rounded-lg px-4 py-2 hover:bg-indigo-700 transition">Get
-                                                    an Appointment</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <% }) %>
-                                        <% } %>
+
+                        <% if (properties.length===0 ) { %>
+                            <p class="text-center text-gray-800 text-lg">No property available or
+                                created yet. <br>
+                                <% if (user.role=="buyer" ) { %>
+                                    <a class=" rounded-full text-white underline font-semibold py-3 px-4"
+                                        href="/user/login">Login</a>If you are Agent/Seller then login to create
+                                    Property.
+                            </p>
+                            <% } %>
+                                <% } else { %>
+                                    <% properties.forEach((prop)=> { %>
+                                        <div class="card glass rounded-xl p-4 mb-6">
+                                            <ul class="space-y-4">
+                                                <li class="text-xl font-semibold underline">Property Details:</li>
+                                                <li class="flex items-center space-x-4">
+                                                    <img class="w-40 h-30 object-cover rounded-lg"
+                                                        src="/images/<%= prop.image %>" alt="Property Image">
+                                                    <div>
+                                                        <p class="font-bold">Property Creator: <%= prop.owner.name %> (
+                                                                <%= prop.owner.role %>)</p>
+                                                        <p><strong>Property ID:</strong>
+                                                            <%= prop._id %>
+                                                                <p><strong>Title:</strong>
+                                                                    <%= prop.title %>
+                                                                </p>
+                                                                <p><strong>Description:</strong>
+                                                                    <%= prop.description %>
+                                                                </p>
+                                                                <p><strong>Price:</strong>
+                                                                    <%= prop.price %>
+                                                                </p>
+                                                                <p><strong>Location:</strong>
+                                                                    <%= prop.location %>
+                                                                </p>
+                                                                <p><strong>Status:</strong>
+                                                                    <%= prop.status %>
+                                                                </p>
+                                                    </div>
+                                                </li>
+                                                <li class="text-center">
+                                                    <a href="/appointment/<%= user._id %>"
+                                                        class="inline-block bg-indigo-600 text-white rounded-lg px-4 py-2 hover:bg-indigo-700 transition">Get
+                                                        an Appointment</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <% }) %>
+                                            <% } %>
             </div>
 
             <!-- Appointment Section -->
             <div class="glass rounded-2xl p-6 mb-6">
                 <h2 class="text-2xl font-bold mb-4">Your Appointments</h2>
-                <% if (owner.role=="buyer" ) { %>
+                <% if (owner.role=="buyer" && properties.length> 0 ) { %>
                     <a href="/appointment/<%= user._id %>"
                         class="block text-center bg-indigo-600 text-white rounded-xl px-6 py-3 font-semibold mb-4 hover:bg-indigo-700 transition">Get
                         an Appointment</a>
                     <% } %>
-                        <% if (!appointments) { %>
-                            <p class="text-center text-gray-400">No appointments available.</p>
+                        <% if (!appointments || appointments.length===0 ) { %>
+                            <p class="text-center text-gray-800 text-2xl">No property available to get an appointment.
+                            </p>
+
                             <% } else { %>
                                 <% appointments.forEach((appointment)=> { %>
                                     <div class="card glass rounded-xl p-4 mb-6">
@@ -71,6 +83,9 @@
                                             <li class="text-xl font-semibold underline">Appointment Details:</li>
                                             <li><strong>Appointment Creator:</strong>
                                                 <%= appointment.owner.name %>
+                                            </li>
+                                            <li><strong>Property ID:</strong>
+                                                <%=appointment.property._id %>
                                             </li>
                                             <li><strong>Appointment ID:</strong>
                                                 <%= appointment._id %>
