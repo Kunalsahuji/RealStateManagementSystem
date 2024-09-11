@@ -8,9 +8,15 @@ const propertySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"
     },
+    appointment: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Appointment"
+    }],
     status: {
         type: String,
-        enum: ["available", "sold", "pending"]
+        enum: ["available", "sold", "pending"],
+        set: (val) => val.toLowerCase(),
+
     },
     image: String,
 

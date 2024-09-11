@@ -1,17 +1,23 @@
 var express = require('express');
 var router = express.Router();
 const { isLoggedIn } = require('../utility/auth');
-const { homepage, aboutpage, currentUser, getRegister, postRegister, getLogin, postLogin, getLogout, profile } = require('../controllers/userController');
+const {
+    homepage,
+    aboutpage,
+    currentUser,
+    getRegister,
+    postRegister,
+    getLogin,
+    postLogin,
+    getLogout,
+    profile
+} = require('../controllers/userController');
 
 
 /* GET home page */
 router.get('/', homepage)
 
 router.get('/about', aboutpage)
-
-// current user
-// router.get('/current', currentUser)
-
 
 // register user
 router.get('/register', getRegister)
@@ -24,7 +30,7 @@ router.get('/login', getLogin)
 router.post('/login', postLogin, (req, res, next) => { })
 
 // logout user
-router.get('/logout', getLogout)
+router.get('/logout', isLoggedIn, getLogout)
 
 // profile
 router.get('/profile', isLoggedIn, profile)

@@ -10,8 +10,7 @@ const getAppointment = (req, res, next) => {
 }
 const postAppointment = async (req, res, next) => {
     try {
-        const appointProperty = AppointmentSchema.find().populate('property')
-        console.log("ye post appointment ka h", appointProperty)
+        const appointProperty = await AppointmentSchema.find().populate('property')
         const newAppointment = new AppointmentSchema({
             ...req.body,
             owner: req.user._id,
@@ -19,7 +18,6 @@ const postAppointment = async (req, res, next) => {
             user: req.user,
             appointProperty
         })
-        await newAppointment.save()
         res.redirect('/user/profile')
     } catch (error) {
         console.log(error)

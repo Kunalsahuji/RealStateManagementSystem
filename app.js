@@ -4,14 +4,15 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const connectDB = require('./models/dbConnection')
+const connectDB = require('./config/dbConnection')
 const UserSchema = require('./models/userModel')
 const passport = require("passport");
 const session = require("express-session");
 var userRouter = require('./routes/user');
 var propertyRouter = require('./routes/property');
 var appointmentRouter = require('./routes/appointment');
-
+// require('dotenv').config()
+connectDB()
 
 var app = express();
 
@@ -30,7 +31,7 @@ app.use(
   session({
     saveUninitialized: true,
     resave: true,
-    secret: "j8rm",
+    secret: process.env.ACCESS_TOKEN_SECRET
   })
 );
 app.use(passport.initialize());

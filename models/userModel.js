@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     password: String,
     role: {
         type: String,
-        enum: ["buyer", "seller", "agent"]
+        enum: ["buyer", "seller", "agent"],
+        set: (val) => val.toLowerCase(),
     },
 
 })

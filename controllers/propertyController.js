@@ -1,7 +1,4 @@
 const PropertySchema = require('../models/propertyModel')
-const { get } = require('../routes/appointment')
-const upload = require('../utility/multer')
-
 const getProperty = (req, res, next) => {
     res.render('create-property', { user: req.user })
 }

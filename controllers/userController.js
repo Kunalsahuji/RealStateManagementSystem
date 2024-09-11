@@ -5,13 +5,11 @@ const PropertySchema = require('../models/propertyModel')
 const AppointmentSchema = require('../models/appointmentModel');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const { isLoggedIn } = require('../utility/auth');
 passport.use(UserSchema.createStrategy());
 
 const homepage = async (req, res, next) => {
     try {
         const properties = await PropertySchema.find().populate('owner')
-        // console.log(`/page user: ${req.user}, owner: ${req.user}, properties: ${properties}, propertyId: ${req.params.propertyId}`)
         res.render('index', {
             properties: properties,
             user: req.user,
@@ -79,8 +77,6 @@ const profile = async (req, res, next) => {
     try {
         const properties = await PropertySchema.find().populate('owner')
         const appointments = await AppointmentSchema.find().populate('owner')
-        console.log(`propertyPopulateOwner ${properties}`)
-        console.log(`appointmentPopulateOwner ${appointments}`)
         res.render('profile', {
             properties: properties,
             appointments: appointments,
@@ -104,13 +100,4 @@ module.exports = {
     postLogin,
     getLogout,
     profile
-
-
 }
-
-// const properties = await PropertySchema.find().populate('owner')
-// const appointments = await AppointmentSchema.find().populate('owner')
-// const appointmentProp = await AppointmentSchema.find().populate('property')
-// console.log(`propertyPopulateOwner ${properties}`)
-// console.log(`appoingmentPopulateOwner ${appointments}`)
-// console.log(`appoingmentPopulateProperty ${appointmentProp}`)
