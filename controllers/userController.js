@@ -5,6 +5,7 @@ const PropertySchema = require('../models/propertyModel')
 const AppointmentSchema = require('../models/appointmentModel');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
+require('dotenv').config();
 passport.use(UserSchema.createStrategy());
 
 const homepage = async (req, res, next) => {

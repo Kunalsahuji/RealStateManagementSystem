@@ -1,4 +1,6 @@
 const PropertySchema = require('../models/propertyModel')
+require('dotenv').config();
+
 const getProperty = (req, res, next) => {
     res.render('create-property', { user: req.user })
 }

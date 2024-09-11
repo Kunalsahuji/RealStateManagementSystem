@@ -2,7 +2,7 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const connectDB = async () => {
     try {
-        const connect =await mongoose.connect(process.env.CONNECTION_STRING)
+        await mongoose.connect(process.env.CONNECTION_STRING)
         console.log("Database Connect")
     } catch (error) {
         console.log(error)
@@ -10,9 +10,3 @@ const connectDB = async () => {
     }
 }
 module.exports = connectDB
-// const mongoose = require('mongoose');
-// mongoose.connect("mongodb://0.0.0.0/real-states").then(() => {
-//     console.log("DB connected!")
-// }).catch((error) => {
-//     console.log(error.message)
-// })

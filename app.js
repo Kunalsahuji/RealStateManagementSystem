@@ -1,4 +1,3 @@
-require('dotenv').config('./.env');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -11,7 +10,7 @@ const session = require("express-session");
 var userRouter = require('./routes/user');
 var propertyRouter = require('./routes/property');
 var appointmentRouter = require('./routes/appointment');
-// require('dotenv').config()
+require('dotenv').config()
 connectDB()
 
 var app = express();

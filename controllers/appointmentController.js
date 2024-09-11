@@ -1,4 +1,5 @@
 const AppointmentSchema = require('../models/appointmentModel')
+require('dotenv').config();
 
 const getAppointment = (req, res, next) => {
     res.render('create-appointment',
