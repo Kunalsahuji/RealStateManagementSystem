@@ -11,8 +11,8 @@ var userRouter = require('./routes/user');
 var propertyRouter = require('./routes/property');
 var appointmentRouter = require('./routes/appointment');
 require('dotenv').config()
-connectDB()
-
+// connectDB()
+ 
 var app = express();
 
 // view engine setup

@@ -15,7 +15,6 @@ const homepage = async (req, res, next) => {
             properties: properties,
             user: req.user,
             property: req.params.propertyId,
-            owner: req.user
         })
     } catch (error) {
         console.log(error.message)
@@ -35,7 +34,6 @@ const currentUser = async (req, res, next) => {
     const appointments = await AppointmentSchema.find().populate("owner")
     res.render("profile", {
         properties: properties,
-        owner: req.user,
         appointments: appointments,
         user: req.user
     })
@@ -81,7 +79,6 @@ const profile = async (req, res, next) => {
         res.render('profile', {
             properties: properties,
             appointments: appointments,
-            owner: req.user,
             user: req.user,
             propertyId: req.params.propertyId
 

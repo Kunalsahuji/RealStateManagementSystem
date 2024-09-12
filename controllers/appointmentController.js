@@ -1,24 +1,35 @@
-const AppointmentSchema = require('../models/appointmentModel')
+const AppointmentSchema = require('../models/appointmentModel');
+const PropertySchema = require('../models/propertyModel');
+const UserSchema = require('../models/userModel');
 require('dotenv').config();
 
-const getAppointment = (req, res, next) => {
-    res.render('create-appointment',
-        {
-            owner: req.user_id,
-            property: req.params.propertyId,
-            user: req.user
-        })
+const getAppointment = async (req, res, next) => {
+    try {
+        const appointProperty = await AppointmentSchema.find().populate('property')
+
+        res.render('create-appointment',
+            {
+                owner: req.user_id,
+                property: req.params.propertyId,
+                user: req.user,
+                appointProperty
+            })
+    } catch (error) {
+
+    }
 }
 const postAppointment = async (req, res, next) => {
     try {
+        const user = await UserSchema.findById(req.user._id);
         const appointProperty = await AppointmentSchema.find().populate('property')
-        const newAppointment = new AppointmentSchema({
+        const Appointment = new AppointmentSchema({
             ...req.body,
-            owner: req.user._id,
+            owner: user._id,
             property: req.params.propertyId,
-            user: req.user,
-            appointProperty
         })
+        await Appointment.save()
+        user.appointment.push(Appointment._id) //appointment push into userSchema
+        await user.save()
         res.redirect('/user/profile')
     } catch (error) {
         console.log(error)

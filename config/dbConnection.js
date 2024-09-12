@@ -1,12 +1,19 @@
-require('dotenv').config();
+// require('dotenv').config();
+// const mongoose = require('mongoose');
+// const connectDB = async () => {
+//     try {
+//         await mongoose.connect(process.env.CONNECTION_STRING)
+//         console.log("Database Connect")
+//     } catch (error) {
+//         console.log(error)
+//         process.exit(1)
+//     }
+// }
+// module.exports = connectDB
+
 const mongoose = require('mongoose');
-const connectDB = async () => {
-    try {
-        await mongoose.connect(process.env.CONNECTION_STRING)
-        console.log("Database Connect")
-    } catch (error) {
-        console.log(error)
-        process.exit(1)
-    }
-}
-module.exports = connectDB
+mongoose.connect("mongodb://0.0.0.0/PropertyDealing").then(() => {
+    console.log("DB Connected!")
+}).catch((err) => {
+    console.log(err)
+});

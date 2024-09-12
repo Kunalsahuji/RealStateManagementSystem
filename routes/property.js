@@ -6,7 +6,7 @@ const upload = require('../utility/multer');
 const { getProperty, postProperty } = require('../controllers/propertyController');
 
 /* Create Property */
-router.get('/', isLoggedIn, getProperty)
+router.get('/', isLoggedIn, varifyroleProperty, getProperty)
 
 router.post('/', isLoggedIn, varifyroleProperty, upload.single("image"), postProperty)
 

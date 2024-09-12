@@ -20,6 +20,7 @@ const propertySchema = new mongoose.Schema({
     },
     image: String,
 
-})
+}, { timestamps: true }
+)
 const PropertySchema = mongoose.model("Property", propertySchema)
 module.exports = PropertySchema
