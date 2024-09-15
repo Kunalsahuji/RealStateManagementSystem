@@ -75,7 +75,13 @@ const getLogout = (req, res, next) => {
 const profile = async (req, res, next) => {
     try {
         const properties = await PropertySchema.find().populate('owner')
+        // const properties = await PropertySchema.find({})
+        //     .populate('owner')
+        //     .populate({ path: 'appointment', populate: { path: 'owner' } });
         const appointments = await AppointmentSchema.find().populate('owner')
+        // const appointments = await AppointmentSchema.find({})
+        //     .populate({ path: 'property', select: 'title' })
+        //     .populate('owner');
         res.render('profile', {
             properties: properties,
             appointments: appointments,

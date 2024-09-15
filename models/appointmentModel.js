@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 const appointmentSchema = new mongoose.Schema({
-    property: [{
+    property: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Property"
-    }],
+    },
     owner: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User"

@@ -9,7 +9,7 @@
             <div class="glass rounded-2xl p-6 mb-6">
                 <h2 class="text-2xl font-bold mb-4">Your Properties</h2>
                 <% if (user.role==="seller" || user.role==="agent" ) { %>
-                    <a href="/property"
+                    <a href="/property/create/<%=user._id %>"
                         class="block text-center bg-indigo-600 text-white rounded-xl px-6 py-3 font-semibold mb-4 hover:bg-indigo-700 transition">
                         Create Property
                     </a>
@@ -55,7 +55,7 @@
                                                 </div>
                                             </li>
                                             <li class="text-center">
-                                                <a href="/appointment/<%= user._id %>"
+                                                <a href="/appointment/<%= user.property._id %>"
                                                     class="inline-block bg-indigo-600 text-white rounded-lg px-4 py-2 hover:bg-indigo-700 transition">
                                                     Get an Appointment
                                                 </a>
@@ -69,12 +69,12 @@
             <!-- Appointment Section -->
             <div class="glass rounded-2xl p-6 mb-6">
                 <h2 class="text-2xl font-bold mb-4">Your Appointments</h2>
-                <% if (user.role==="buyer" && properties.length> 0) { %>
-                    <a href="/appointment/<%= user._id %>"
+                <!-- <% if (user.role==="buyer" && properties.length> 0) { %>
+                    <a href="/appointment/<%= property._id %>"
                         class="block text-center bg-indigo-600 text-white rounded-xl px-6 py-3 font-semibold mb-4 hover:bg-indigo-700 transition">
                         Get an Appointment
                     </a>
-                    <% } %>
+                    <% } %> -->
 
                         <% if (!appointments || appointments.length===0 ) { %>
                             <p class="text-center text-gray-800 text-lg">No Appointment available yet.

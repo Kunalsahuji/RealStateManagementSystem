@@ -22,14 +22,17 @@ const postAppointment = async (req, res, next) => {
     try {
         const user = await UserSchema.findById(req.user._id);
         const appointProperty = await AppointmentSchema.find().populate('property')
+        const property = PropertySchema.findById(req.params.propertyId)
         const Appointment = new AppointmentSchema({
             ...req.body,
             owner: user._id,
             property: req.params.propertyId,
         })
-        await Appointment.save()
         user.appointment.push(Appointment._id) //appointment push into userSchema
+        await Appointment.save()
         await user.save()
+        await property.appointment.push(Appointment._id)
+        await property.save()
         res.redirect('/user/profile')
     } catch (error) {
         console.log(error)
