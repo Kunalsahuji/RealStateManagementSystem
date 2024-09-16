@@ -5,8 +5,8 @@ const { getAppointment, postAppointment } = require('../controllers/appointmentC
 
 
 /* Create appointment */
-router.get('/:propertyId', isLoggedIn, varifyroleAppointment, getAppointment)
+router.get('/create/:propertyId', isLoggedIn, varifyroleAppointment, getAppointment)
 
-router.post('/:propertyId', isLoggedIn, varifyroleAppointment, postAppointment)
+router.post('/create/:propertyId', isLoggedIn, varifyroleAppointment, postAppointment)
 
 module.exports = router

@@ -5,38 +5,57 @@ require('dotenv').config();
 
 const getAppointment = async (req, res, next) => {
     try {
-        const appointProperty = await AppointmentSchema.find().populate('property')
-
+        const property = await PropertySchema.findById(req.params.propertyId).populate('owner')
+        if (!property) {
+            return res.status(404).send("Property Not Fount!")
+        }
         res.render('create-appointment',
             {
                 owner: req.user_id,
-                property: req.params.propertyId,
+                property: property,
                 user: req.user,
-                appointProperty
+                propertyId: req.params.propertyId,
             })
     } catch (error) {
-
+        console.log(error)
+        res.status(500).send('server error but meri galti nhi h!')
     }
 }
 const postAppointment = async (req, res, next) => {
     try {
         const user = await UserSchema.findById(req.user._id);
-        const appointProperty = await AppointmentSchema.find().populate('property')
-        const property = PropertySchema.findById(req.params.propertyId)
-        const Appointment = new AppointmentSchema({
-            ...req.body,
-            owner: user._id,
-            property: req.params.propertyId,
+        const userId = req.user._id
+        const property = await PropertySchema.findById(req.params.propertyId)
+        const propertyId = req.params.propertyId;
+        const existingAppointment = await AppointmentSchema.findOne({
+            property: propertyId,
+            owner: userId
         })
-        user.appointment.push(Appointment._id) //appointment push into userSchema
-        await Appointment.save()
+
+        if (!property) {
+            return res.status(404).send("Property Not Fount!")
+        }
+        if (existingAppointment) {
+            // return res.status(400).json({ message: `You already booked an appointment for this property.<a href="/user/profile">Profile</a>` })
+            return res.redirect('/user/profile?error=already_booked');
+
+        }
+
+        const newAppointment = new AppointmentSchema({
+            status: req.body.status,
+            date: req.body.date,
+            owner: user._id,
+            property: propertyId,
+        })
+        await newAppointment.save()
+        user.appointment.push(newAppointment._id) //appointment push into userSchema
+        await property.appointment.push(newAppointment._id)
         await user.save()
-        await property.appointment.push(Appointment._id)
         await property.save()
         res.redirect('/user/profile')
     } catch (error) {
         console.log(error)
-        res.send(error.message)
+        res.status(500).send('server error but meri galti nhi h!')
     }
 }
 

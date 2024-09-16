@@ -12,7 +12,7 @@
 // module.exports = connectDB
 
 const mongoose = require('mongoose');
-mongoose.connect("mongodb://0.0.0.0/PropertyDealing").then(() => {
+mongoose.connect("mongodb://0.0.0.0/PropertyLELO").then(() => {
     console.log("DB Connected!")
 }).catch((err) => {
     console.log(err)
