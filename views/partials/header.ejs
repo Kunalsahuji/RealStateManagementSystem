@@ -30,12 +30,21 @@
 
                     <% } else { %>
                         <a class="hover:bg-gray-700 rounded-full text-white py-3 px-6 bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105"
-                            href="/user/profile">Profile</a>
-                        <a class="hover:bg-gray-700 rounded-full text-white py-3 px-6 bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105"
-                            href="/user/logout">Logout</a>
+                            href="/user/profile">Profile  </a>
+                            <% if(user.role === "buyer"){ %>
+                                <a class="hover:bg-gray-700 rounded-full text-white py-3 px-6 bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105"
+                                href="/appointment/timeline">Appointment-Timeline  
+                               </a>
+                             <% } else  { %>
+                                <a class="hover:bg-gray-700 rounded-full text-white py-3 px-6 bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105"
+                            href="/property/timeline">Propety-Timeline  
+                            </a>
+                                <% } %>
                         <a class="hover:bg-gray-700 rounded-full text-white py-3 px-6 bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105"
                             href="/user/about">About
                             us</a>
+                        <a class="hover:bg-gray-700 rounded-full text-white py-3 px-6 bg-gray-600 transition duration-300 ease-in-out transform hover:scale-105"
+                            href="/user/logout">Logout</a>
 
                         <% } %>
 
@@ -65,15 +74,19 @@
 
                     <% } else { %>
                         <a class="border border-gray-600 text-center block transform hover:scale-105 transition duration-300 hover:bg-gray-700 rounded-full text-white w-[90%] m-auto"
-                            href="/user">Home</a>
-                        <a class="border border-gray-600 text-center block transform hover:scale-105 transition duration-300 hover:bg-gray-700 rounded-full text-white w-[90%] m-auto"
                             href="/user/profile">Profile</a>
+                            <% if(user.role === "buyer"){ %>                       
                         <a class="border border-gray-600 text-center block transform hover:scale-105 transition duration-300 hover:bg-gray-700 rounded-full text-white w-[90%] m-auto"
-                            href="/user/logout">Logout</a>
+                            href="/property/timeline">Property-Timeline</a>
+                            <% } else  { %> 
+                                <a class="border border-gray-600 text-center block transform hover:scale-105 transition duration-300 hover:bg-gray-700 rounded-full text-white w-[90%] m-auto"
+                            href="/appointment/timeline">Appointment-Timeline </a>
+                            <% } %>
                         <a class="border border-gray-600 text-center block transform hover:scale-105 transition duration-300 hover:bg-gray-700 rounded-full text-white w-[90%] m-auto"
                             href="/user/about">About
                             us</a>
-
+                        <a class="border border-gray-600 text-center block transform hover:scale-105 transition duration-300 hover:bg-gray-700 rounded-full text-white w-[90%] m-auto"
+                            href="/user/logout">Logout</a>
                         <% } %>
             </div>
         </div>

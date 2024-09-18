@@ -1,37 +1,41 @@
 <%- include("partials/header") %>
 
-    <div class="mt-5 w-full max-w-lg mx-auto px-6 py-6">
-        <h1 class="text-3xl font-bold text-center mb-6 glass p-4 rounded-lg">
-            Create Property
-        </h1>
+<div class="w-full max-w-lg mx-auto px-6 py-6">
+    <h1 class="text-3xl font-bold text-center mb-6 glass p-4 rounded-lg">
+        Create Property
+    </h1>
 
-        <form class="glass p-6 rounded-lg shadow-md" action="/property/create/<%= user._id%>" method="post" enctype="multipart/form-data">
-            <div class="mb-4">
-                <input class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" type="text"
-                    name="title" placeholder="Title">
-            </div>
-            <div class="mb-4">
-                <input class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" type="text"
-                    name="description" placeholder="Description">
-            </div>
-            <div class="mb-4">
-                <input class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" type="number"
-                    name="price" placeholder="Price">
-            </div>
-            <div class="mb-4">
-                <input class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" type="text"
-                    name="location" placeholder="Location">
-            </div>
-            <div class="mb-4">
-                <input class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" type="file"
-                    name="image">
-            </div>
-            <div class="mb-4">
-                <input class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" type="text"
-                    name="status" placeholder="available | sold | pending">
-            </div>
-            <button class="button w-full rounded-2xl px-4 py-2 text-lg">Submit</button>
-        </form>
-    </div>
+    <form class="glass p-6 rounded-lg shadow-md" action="/property/create/<%= user._id%>" method="post" enctype="multipart/form-data">
+        <div class="mb-4">
+            <input class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" type="text"
+                name="title" placeholder="Title">
+        </div>
+        <div class="mb-4">
+            <input class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" type="text"
+                name="description" placeholder="Description">
+        </div>
+        <div class="mb-4">
+            <input class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" type="number"
+                name="price" placeholder="Price">
+        </div>
+        <div class="mb-4">
+            <input class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" type="text"
+                name="location" placeholder="Location">
+        </div>
+        <div class="mb-4">
+            <input class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" type="file"
+                name="image">
+        </div>
+        <div class="mb-4">
+            <select class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" name="status">
+                <option value="" disabled selected>Select Status</option>
+                <option value="available">Available</option>
+                <option value="sold">Sold</option>
+                <option value="pending">Pending</option>
+            </select>
+        </div>
+        <button class="button w-full rounded-2xl px-4 py-2 text-lg">Submit</button>
+    </form>
+</div>
 
-    <%- include('partials/footer') %>
+<%- include('partials/footer') %>
