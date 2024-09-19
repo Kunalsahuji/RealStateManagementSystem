@@ -1,0 +1,37 @@
+<%- include('partials/header') %>
+
+<div class="w-full max-w-6xl mx-auto px-6 py-6">
+    <h1 class="text-3xl font-bold text-center mb-6 glass p-4 rounded-lg">
+        Property Timeline
+    </h1>
+
+    <% if (properties.length === 0) { %>
+        <p class="text-center text-lg glass p-4 rounded-lg">No property created yet.</p>
+    <% } else { %>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% properties.forEach(property => { %>
+                <div class="glass shadow-md p-6 rounded-lg flex flex-col text-center">
+                    <h6 class=" mb-2"><span class="font-bold">Id:  </span><%= property._id %></h6>
+                    <h2 class="text-2xl font-bold mb-2"><%= property.title %></h2>
+                    <p class="mb-2"><strong>Description:</strong> <%= property.description %></p>
+                    <p class="mb-2"><strong>Price:</strong> $<%= property.price %></p>
+                    <p class="mb-2"><strong>Location:</strong> <%= property.location %></p>
+                    <p class="mb-2"><strong>Status:</strong> <%= property.status %></p>
+                    
+                    <div class=" h-48  overflow-hidden rounded-lg mt-4 mb-4 m-auto">
+                        <img src="/images/<%= property.image %>" alt="Property Image" class=" h-full object-cover">
+                    </div>
+                    
+                    <div class="flex justify-center items-center mt-auto space-x-4">
+                        <a href="/property/update/<%= property._id %>" class="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition duration-300">Update</a>
+                        <a href="/property/delete/<%= property._id %>" class="bg-red-500 text-white px-4 py-2 rounded-md hover:bg-red-600 transition duration-300">Delete</a>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    <% } %>
+</div>
+
+<%- include('partials/footer') %>
+
+
