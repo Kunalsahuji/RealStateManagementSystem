@@ -36,8 +36,8 @@ const postAppointment = async (req, res, next) => {
             return res.status(404).send("Property Not Fount!")
         }
         if (existingAppointment) {
-            // return res.status(400).json({ message: `You already booked an appointment for this property.<a href="/user/profile">Profile</a>` })
-            return res.redirect('/user/profile?error=already_booked');
+            // return res.status(400).json({ message: `You already booked an appointment for this property.<a href="/profile">Profile</a>` })
+            return res.redirect('/profile?error=already_booked');
 
         }
 
@@ -52,14 +52,78 @@ const postAppointment = async (req, res, next) => {
         await property.appointment.push(newAppointment._id)
         await user.save()
         await property.save()
-        res.redirect('/user/profile')
+        res.redirect('/profile')
     } catch (error) {
         console.log(error)
         res.status(500).send('server error but meri galti nhi h!')
     }
 }
 
+// Appointment timeline
+const getAppointmentTimeline = async (req, res, next) => {
+    try {
+        const appointments = await AppointmentSchema.find({ owner: req.user._id });
+        // appointmentProp.forEach(prop => console.log(prop.property.title))
+        res.render('Appointment-timeline', { appointments, user: req.user });
+    } catch (error) {
+        console.log(error);
+        res.send(error.message);
+    }
+};
+
+
+// Get a property for updating
+const renderAppointment = async (req, res, next) => {
+    try {
+        const appointment = await AppointmentSchema.findById(req.params.id);
+        res.render('update-Appointment', { appointment, user: req.user });
+    } catch (error) {
+        console.log(error);
+        res.send(error.message);
+    }
+};
+
+
+// Update appointment
+const updateAppointment = async (req, res, next) => {
+    try {
+        const appointment = await AppointmentSchema.findByIdAndUpdate(req.params.id, req.body);
+        await appointment.save()
+        res.redirect('/appointment/timeline');
+    } catch (error) {
+        console.log(error);
+        res.send(error.message);
+    }
+};
+
+// Delete appointment
+const deleteAppointment = async (req, res, next) => {
+    try {
+        const appointment = await AppointmentSchema.findById(req.params.id);
+        if (!appointment) {
+            return res.status(404).send('Appointment not found');
+        }
+
+        // Update related user and property
+        await UserSchema.findByIdAndUpdate(appointment.user, {
+            $pull: { appointments: appointment._id }
+        });
+        await PropertySchema.findByIdAndUpdate(appointment.property, {
+            $pull: { appointments: appointment._id }
+        });
+        await AppointmentSchema.findByIdAndDelete(req.params.id);
+
+        res.redirect('/appointment/timeline');
+    } catch (error) {
+        console.log(error);
+        res.send(error.message);
+    }
+};
 module.exports = {
     getAppointment,
-    postAppointment
+    postAppointment,
+    getAppointmentTimeline,
+    renderAppointment,
+    updateAppointment,
+    deleteAppointment
 }

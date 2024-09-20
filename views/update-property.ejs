@@ -1,0 +1,62 @@
+<%- include("partials/header") %>
+
+<div class="w-full max-w-lg mx-auto px-6 py-6">
+    <h1 class="text-3xl font-bold text-center mb-6 glass p-4 rounded-lg">
+        Update Property
+    </h1>
+
+    <form class="glass p-6 rounded-lg shadow-md" action="/property/update/<%= property._id %>" method="POST" enctype="multipart/form-data">
+        <div class="mb-4">
+            <input 
+                class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" 
+                type="text" 
+                name="title" 
+                value="<%= property.title %>" 
+                placeholder="Title">
+        </div>
+        <div class="mb-4">
+            <textarea 
+                class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" 
+                name="description" 
+                placeholder="Description"><%= property.description %></textarea>
+        </div>
+        <div class="mb-4">
+            <input 
+                class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" 
+                type="number" 
+                name="price" 
+                value="<%= property.price %>" 
+                placeholder="Price">
+        </div>
+        <div class="mb-4">
+            <input 
+                class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" 
+                type="text" 
+                name="location" 
+                value="<%= property.location %>" 
+                placeholder="Location">
+        </div>
+        <div class="mb-4">
+            <select 
+                class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" 
+                name="status">
+                <option value="" disabled>Select Status</option>
+                <option value="available" <%= property.status === "available" ? "selected" : "" %>>Available</option>
+                <option value="pending" <%= property.status === "pending" ? "selected" : "" %>>Pending</option>
+                <option value="sold" <%= property.status === "sold" ? "selected" : "" %>>Sold</option>
+            </select>
+        </div>
+        <div class="mb-4">
+            <input 
+                class="bg-opacity-80 shadow-lg glass w-full rounded-2xl px-4 py-3 text-lg mb-4" 
+                type="file" 
+                name="image">
+        </div>
+        <button 
+            type="submit" 
+            class="button w-full rounded-2xl px-4 py-2 text-lg">Update Property
+        </button>
+    </form>
+</div>
+
+<%- include('partials/footer') %>
