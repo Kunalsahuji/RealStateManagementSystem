@@ -14,7 +14,7 @@ const homepage = async (req, res, next) => {
         res.render('index', {
             properties: properties,
             user: req.user,
-            property: req.params.propertyId, //
+            property: req.params.propertyId, 
         })
     } catch (error) {
         console.log(error.message)
@@ -49,7 +49,7 @@ const postRegister = async (req, res, next) => {
         const newUser = new UserSchema({ name, email, role })
         await UserSchema.register(newUser, password)
         await newUser.save()
-        res.redirect("/user/login")
+        res.redirect("/login")
     } catch (error) {
         console.log(error)
         res.send(error)
@@ -59,13 +59,13 @@ const getLogin = (req, res, next) => {
     res.render("login", { user: req.user })
 }
 const postLogin = passport.authenticate("local", {
-    successRedirect: "/user/profile",
-    failureRedirect: "/user/login",
+    successRedirect: "/profile",
+    failureRedirect: "/login",
 })
 const getLogout = (req, res, next) => {
     try {
         req.logout(() => {
-            res.redirect('/user')
+            res.redirect('/')
         })
     } catch (error) {
         console.log(error)

@@ -54,13 +54,16 @@ const updateProperty = async (req, res, next) => {
     try {
         const property = await PropertySchema.findById(req.params.id);
 
+        // Update property fields
         property.title = req.body.title;
         property.description = req.body.description;
         property.price = req.body.price;
         property.location = req.body.location;
         property.status = req.body.status;
 
+        // Handle image update
         if (req.file) {
+            // Delete old image
             if (property.image) {
                 fs.unlinkSync(`./public/images/${property.image}`);
             }

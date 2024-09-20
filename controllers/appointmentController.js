@@ -105,14 +105,15 @@ const deleteAppointment = async (req, res, next) => {
         }
 
         // Update related user and property
-        await UserSchema.findByIdAndUpdate(appointment.user, {
+        const user = await UserSchema.findByIdAndUpdate(appointment.user, {
             $pull: { appointments: appointment._id }
         });
+
         await PropertySchema.findByIdAndUpdate(appointment.property, {
             $pull: { appointments: appointment._id }
         });
         await AppointmentSchema.findByIdAndDelete(req.params.id);
-
+console.log(`user: ${user}`)
         res.redirect('/appointment/timeline');
     } catch (error) {
         console.log(error);

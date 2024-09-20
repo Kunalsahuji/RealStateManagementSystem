@@ -11,7 +11,7 @@ var userRouter = require('./routes/user');
 var propertyRouter = require('./routes/property');
 var appointmentRouter = require('./routes/appointment');
 require('dotenv').config()
-// connectDB()
+connectDB()
  
 var app = express();
 
@@ -39,7 +39,7 @@ passport.serializeUser(UserSchema.serializeUser());
 passport.deserializeUser(UserSchema.deserializeUser());
 
 // routes 
-app.use('/user', userRouter);
+app.use('/', userRouter);
 app.use('/property', propertyRouter);
 app.use('/appointment', appointmentRouter);
 
@@ -59,7 +59,6 @@ app.use(function (err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
 
 module.exports = app;
 

@@ -3,7 +3,7 @@ const isLoggedIn = (req, res, next) => {
         next()
     }
     else {
-        res.redirect('/user/login')
+        res.redirect('/login')
     }
 
 }
@@ -13,7 +13,7 @@ const varifyroleProperty = (req, res, next) => {
         next()
     }
     else {
-        res.send('Only buyer have the permission to get appointment property<a href="/user/profile">Profile</a>')
+        res.send('Only buyer have the permission to get appointment property<a href="/profile">Profile</a>')
     }
 }
 
@@ -23,7 +23,7 @@ const varifyroleAppointment = (req, res, next) => {
     }
     else {
         res.send(
-            'Only buyer have the permission to get appointment property<a href="/user/profile">Profile</a>'
+            'Only buyer have the permission to get appointment property<a href="/profile">Profile</a>'
         );
     }
 }
