@@ -50,9 +50,9 @@
                             <ul class="space-y-4">
                                 <li class="text-xl font-semibold underline">Property Details:</li>
                                 <li class="flex items-center space-x-4">
-                                    <img class="w-40 h-30 object-cover rounded-lg"
+                                    <img class="w-40 h-40 object-cover rounded-lg"
                                          src="/images/<%= property.image %>" alt="Property Image">
-                                    <div>
+                                    <div class="space-y-1">
                                         <p class="font-bold">Property Creator: <%= property.owner.name %> (<%= property.owner.role %>)</p>
                                         <p><strong>Property ID:</strong> <%= property._id %></p>
                                         <p><strong>Title:</strong> <%= property.title %></p>
@@ -62,12 +62,14 @@
                                         <p><strong>Status:</strong> <%= property.status %></p>
                                     </div>
                                 </li>
+                                <% if (user.role === "buyer") { %>
                                 <li class="text-center">
                                     <a href="/appointment/create/<%= property._id %>"
                                        class="inline-block bg-indigo-600 text-white rounded-lg px-4 py-2 hover:bg-indigo-700 transition">
                                        Get an Appointment
                                     </a>
                                 </li>
+                                <% } %>
                             </ul>
                         </div>
                     <% }) %>
@@ -78,17 +80,24 @@
             <div class="glass rounded-2xl p-6 mb-6">
                 <h2 class="text-2xl font-bold mb-4">Your Appointments</h2>
                 <% if (!appointments || appointments.length === 0) { %>
-                    <p class="text-center text-gray-800 text-lg">No appointments available yet.</p>
+                    <p class="text-center text-gray-800 text-lg">No appointment available yet.</p>
                 <% } else { %>
                     <% appointments.forEach((appointment) => { %>
                         <div class="card glass rounded-xl p-4 mb-6">
-                            <ul class="space-y-4">
+                            <ul class="space-y-2">
                                 <li class="text-xl font-semibold underline">Appointment Details:</li>
-                                <li><strong>Appointment Creator:</strong> <%= appointment.owner.name %></li>
-                                <li><strong>Property ID:</strong> <%= appointment.property._id %></li>
-                                <li><strong>Appointment ID:</strong> <%= appointment._id %></li>
-                                <li><strong>Status:</strong> <%= appointment.status %></li>
-                                <li><strong>Date:</strong> <%= appointment.date.toISOString().slice(0, 10) %></li>
+                                <div class=" flex items-center space-x-4 justify-around">
+                                   <div class=" space-y-2">
+                                    <li><strong>Appointment Creator:</strong> <%= appointment.owner.name %></li>
+                                    <li><strong>Appointment of Property:</strong> <%= appointment.property.title %></li>
+                                    <li><strong>Property ID:</strong> <%= appointment.property._id %></li>
+                                    <li><strong>Appointment ID:</strong> <%= appointment._id %></li>
+                                    <li><strong>Status:</strong> <%= appointment.status %></li>
+                                    <li><strong>Date:</strong> <%= new Date(appointment.date).toLocaleDateString('en-GB', { year: 'numeric', month: 'long', day: 'numeric' }) %></li>
+                                   </div>
+                                   <div><img class="w-60 h-40 object-cover rounded-lg flex flex-col items-end"
+                                    src="/images/<%= appointment.property.image %>" alt="Property Image"></div>
+                                </div>
                             </ul>
                         </div>
                     <% }) %>

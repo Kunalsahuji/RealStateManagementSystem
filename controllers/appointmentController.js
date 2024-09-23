@@ -96,30 +96,47 @@ const updateAppointment = async (req, res, next) => {
     }
 };
 
-// Delete appointment
 const deleteAppointment = async (req, res, next) => {
     try {
+        // 1. Fetch the appointment to delete
         const appointment = await AppointmentSchema.findById(req.params.id);
         if (!appointment) {
             return res.status(404).send('Appointment not found');
         }
 
-        // Update related user and property
-        const user = await UserSchema.findByIdAndUpdate(appointment.user, {
-            $pull: { appointments: appointment._id }
-        });
+        // 2. Find the user associated with the appointment
+        const user = await UserSchema.findById(appointment.owner);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
 
-        await PropertySchema.findByIdAndUpdate(appointment.property, {
-            $pull: { appointments: appointment._id }
-        });
+        // 3. Remove the appointment from the user's appointments array
+        user.appointment = user.appointment.filter(
+            (appId) => appId.toString() !== appointment._id.toString()
+        );
+        await user.save(); // Save the updated user data
+
+        // 4. Find the property related to the appointment
+        const property = await PropertySchema.findById(appointment.property);
+        if (property) {
+            // Remove the appointment from the property's appointments array
+            property.appointment = property.appointment.filter(
+                (appId) => appId.toString() !== appointment._id.toString()
+            );
+            await property.save(); // Save the updated property data
+        }
+
+        // 5. Delete the appointment from the database
         await AppointmentSchema.findByIdAndDelete(req.params.id);
-console.log(`user: ${user}`)
+
+        // 6. Redirect to the appointment timeline or another appropriate page
         res.redirect('/appointment/timeline');
     } catch (error) {
-        console.log(error);
+        console.log('Error during appointment deletion:', error);
         res.send(error.message);
     }
 };
+
 module.exports = {
     getAppointment,
     postAppointment,

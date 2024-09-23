@@ -78,17 +78,17 @@ const updateProperty = async (req, res, next) => {
     }
 };
 
-// delete property:
+
+
 const deleteProperty = async (req, res, next) => {
     try {
-        // Find the property by ID
-        const property = await PropertySchema.findById(req.params.id);
-        // If the property is not found, handle the error
+        // 1. Find the property by ID
+        const property = await PropertySchema.findById(req.params.id).populate('appointment');
         if (!property) {
             return res.status(404).send('Property not found');
         }
 
-        // 1. Check and delete the image from the file system if it exists
+        // 2. Delete associated image from file system (if it exists)
         if (property.image) {
             const imagePath = `./public/images/${property.image}`;
             fs.access(imagePath, fs.constants.F_OK, (err) => {
@@ -96,40 +96,54 @@ const deleteProperty = async (req, res, next) => {
                     fs.unlink(imagePath, (error) => {
                         if (error) console.log('Error deleting image file:', error);
                     });
-                } else {
-                    console.log('Image file not found:', imagePath);
                 }
             });
         }
 
-        // 2. Remove the property from the database using findByIdAndDelete
-        await PropertySchema.findByIdAndDelete(req.params.id);
-        
-        // 3. Delete all appointments associated with this property
-        // await AppointmentSchema.deleteMany({ propertyId: req.params.id });
-        await AppointmentSchema.deleteMany({ _id: { $in: property.appointment } });
+        // 3. Get the owner (agent/seller) of the property and remove it from their property array
+        const owner = await UserSchema.findById(property.owner);
+        if (owner) {
+            // Remove the property from the user's properties array
+            owner.property = owner.property.filter(
+                (propId) => propId.toString() !== property._id.toString()
+            );
 
-        // 4. Update User's propertyCount
-        const user = await UserSchema.findById(property.owner);
-        if (user) {
-            user.property.pull(property._id);
-            // user.appointment.pull(appointment._id);
-
-            await user.save();
+            await owner.save(); // Save the updated user data
         }
-        console.log(user, "userowner")
 
+        // 4. Find all appointments associated with the property
+        const propertyAppointments = await AppointmentSchema.find({ property: property._id });
 
-        // 5. Redirect to the timeline after deletion
+        if (propertyAppointments.length > 0) {
+            // 5. Delete all appointments associated with this property
+            await AppointmentSchema.deleteMany({ property: property._id });
+
+            // 6. Remove appointments from users who booked them
+            for (let appointment of propertyAppointments) {
+                const buyer = await UserSchema.findById(appointment.owner);
+                if (buyer && buyer.role === 'buyer') {
+                    // Remove the appointment from the buyer's appointment array
+                    buyer.appointment = buyer.appointment.filter(
+                        (appId) => appId.toString() !== appointment._id.toString()
+                    );
+
+                    await buyer.save(); // Save the updated buyer data
+                }
+            }
+        }
+
+        // 7. Delete the property itself
+        await PropertySchema.findByIdAndDelete(req.params.id);
+
         console.log("Property and related appointments deleted");
-        res.redirect('/property/timeline');
 
+        // 8. Redirect to the property timeline or appropriate page
+        res.redirect('/property/timeline');
     } catch (error) {
         console.log('Error during property deletion:', error);
         res.send(error.message);
     }
 };
-
 
 module.exports = {
     renderProperty,
@@ -138,4 +152,4 @@ module.exports = {
     getProperty,
     updateProperty,
     deleteProperty,
-}
+} 
