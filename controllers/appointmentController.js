@@ -48,7 +48,7 @@ const postAppointment = async (req, res, next) => {
             property: propertyId,
         })
         await newAppointment.save()
-        user.appointment.push(newAppointment._id) //appointment push into userSchema
+        user.appointment.push(newAppointment._id) 
         await property.appointment.push(newAppointment._id)
         await user.save()
         await property.save()
@@ -63,8 +63,7 @@ const postAppointment = async (req, res, next) => {
 const getAppointmentTimeline = async (req, res, next) => {
     try {
         const appointments = await AppointmentSchema.find({ owner: req.user._id });
-        // appointmentProp.forEach(prop => console.log(prop.property.title))
-        res.render('Appointment-timeline', { appointments, user: req.user });
+        res.render('appointment-timeline', { appointments, user: req.user });
     } catch (error) {
         console.log(error);
         res.send(error.message);
