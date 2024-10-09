@@ -75,7 +75,7 @@ const getAppointmentTimeline = async (req, res, next) => {
 const renderAppointment = async (req, res, next) => {
     try {
         const appointment = await AppointmentSchema.findById(req.params.id);
-        res.render('update-Appointment', { appointment, user: req.user });
+        res.render('update-appointment', { appointment, user: req.user });
     } catch (error) {
         console.log(error);
         res.send(error.message);
